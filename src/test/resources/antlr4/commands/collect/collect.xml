@@ -1,0 +1,115 @@
+<!-- /*
+ * Teragrep Data Processing Language Parser Library PTH-03
+ * Copyright (C) 2019, 2020, 2021, 2022  Suomen Kanuuna Oy
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://github.com/teragrep/teragrep/blob/main/LICENSE>.
+ *
+ *
+ * Additional permission under GNU Affero General Public License version 3
+ * section 7
+ *
+ * If you modify this Program, or any covered work, by linking or combining it
+ * with other code, such other code is not for that reason alone subject to any
+ * of the requirements of the GNU Affero GPL version 3 as long as this Program
+ * is the same Program as licensed from Suomen Kanuuna Oy without any additional
+ * modifications.
+ *
+ * Supplemented terms under GNU Affero General Public License version 3
+ * section 7
+ *
+ * Origin of the software must be attributed to Suomen Kanuuna Oy. Any modified
+ * versions must be marked as "Modified version of" The Program.
+ *
+ * Names of the licensors and authors may not be used for publicity purposes.
+ *
+ * No rights are granted for use of trade names, trademarks, or service marks
+ * which are in The Program if any.
+ *
+ * Licensee must indemnify licensors and authors for any liability that these
+ * contractual assumptions impose on licensors and authors.
+ *
+ * To the extent this program is licensed as part of the Commercial versions of
+ * Teragrep, the applicable Commercial License may apply to this file if you as
+ * a licensee so wish it.
+ */ -->
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+    <transformStatement>
+        <value>|</value>
+        <collectTransformation>
+            <value>collect</value>
+            <t_collect_indexParameter>
+                <value>index=</value>
+                <stringType>
+                    <value>baz</value>
+                </stringType>
+            </t_collect_indexParameter>
+            <t_collect_addtimeParameter>
+                <value>addtime=</value>
+                <booleanType>
+                    <value>true</value>
+                </booleanType>
+            </t_collect_addtimeParameter>
+            <t_collect_hostParameter>
+                <value>host=</value>
+                <stringType>
+                    <value>da</value>
+                </stringType>
+            </t_collect_hostParameter>
+            <t_collect_spoolParameter>
+                <value>spool=</value>
+                <booleanType>
+                    <value>false</value>
+                </booleanType>
+            </t_collect_spoolParameter>
+            <t_collect_testmodeParameter>
+                <value>testmode=</value>
+                <booleanType>
+                    <value>false</value>
+                </booleanType>
+            </t_collect_testmodeParameter>
+            <t_collect_run_in_previewParameter>
+                <value>run_in_preview=</value>
+                <booleanType>
+                    <value>true</value>
+                </booleanType>
+            </t_collect_run_in_previewParameter>
+            <t_collect_sourceParameter>
+                <value>source=</value>
+                <stringType>
+                    <value>biz</value>
+                </stringType>
+            </t_collect_sourceParameter>
+            <t_collect_sourcetypeParameter>
+                <value>sourcetype=</value>
+                <stringType>
+                    <value>bar</value>
+                </stringType>
+            </t_collect_sourcetypeParameter>
+            <t_collect_fileParameter>
+                <value>file=</value>
+                <stringType>
+                    <value>iii</value>
+                </stringType>
+            </t_collect_fileParameter>
+            <t_collect_outputformatParameter>
+                <value>output_format=</value>
+                <value>raw</value>
+            </t_collect_outputformatParameter>
+        </collectTransformation>
+        <transformStatement>
+            <EOF/>
+        </transformStatement>
+    </transformStatement>
+</root>

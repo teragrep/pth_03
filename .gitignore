@@ -1,0 +1,14 @@
+/gen/
+notes/*
+target/*
+.settings/*
+.vscode/*
+.classpath
+.factorypath
+**/.antlr/
+/settings.xml
+/src/main/antlr4/imports/DPLLexerModes.g4
+/.idea/*
+/pth_03.iml
+/.project
+/.classpath

@@ -1,0 +1,183 @@
+<!-- /*
+ * Teragrep Data Processing Language Parser Library PTH-03
+ * Copyright (C) 2019, 2020, 2021, 2022  Suomen Kanuuna Oy
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://github.com/teragrep/teragrep/blob/main/LICENSE>.
+ *
+ *
+ * Additional permission under GNU Affero General Public License version 3
+ * section 7
+ *
+ * If you modify this Program, or any covered work, by linking or combining it
+ * with other code, such other code is not for that reason alone subject to any
+ * of the requirements of the GNU Affero GPL version 3 as long as this Program
+ * is the same Program as licensed from Suomen Kanuuna Oy without any additional
+ * modifications.
+ *
+ * Supplemented terms under GNU Affero General Public License version 3
+ * section 7
+ *
+ * Origin of the software must be attributed to Suomen Kanuuna Oy. Any modified
+ * versions must be marked as "Modified version of" The Program.
+ *
+ * Names of the licensors and authors may not be used for publicity purposes.
+ *
+ * No rights are granted for use of trade names, trademarks, or service marks
+ * which are in The Program if any.
+ *
+ * Licensee must indemnify licensors and authors for any liability that these
+ * contractual assumptions impose on licensors and authors.
+ *
+ * To the extent this program is licensed as part of the Commercial versions of
+ * Teragrep, the applicable Commercial License may apply to this file if you as
+ * a licensee so wish it.
+ */ -->
+| abstract maxlines=1
+| accum asd AS chart
+| addcoltotals labelfield=bar label=strong baz,biz,buz
+| addinfo
+| addtotals row=TRUE labelfield=bar label="nolabel" fieldname=biz biz,bar,buz
+| analyzefields classfield=bar
+| anomalies threshold=1 labelonly=TRUE normalize=FALSE maxvalues=1 field=asd blacklist="/asd" blacklistthreshold=3 BY barfoo
+| anomalousvalue action=annotate minsupcount=1 maxanofreq=2.1 minsupfreq=0.1 minnormfreq=2.3 pthresh=9.9
+| anomalydetection method=zscore action=rm pthresh=4.4 cutoff=TRUE 
+| append extendtimerange=TRUE maxtime=1 maxout=2 timeout=3 [search *]
+| appendcols override=FALSE extendtimerange=TRUE maxtime=1 maxout=2 timeout=3 [search *]
+| appendpipe run_in_preview=TRUE [search *]
+| arules sup=6 conf=0.3 bar biz
+| associate improv=3.2 supcnt=3 supfreq=2.1 bar,biz,baz
+| autoregress par AS biz:buz p=1-1
+| audit
+| bin bins=2 minspan=3d span=3log3 start=1 end=2 aligntime=late biz AS bar
+| bucketdir pathfield=bar sizefield=buz maxcount=3 countfield=biz sep=:
+| chart agg=count(baz) dc(biz) OVER bar BY foo
+| chart sparkline(count,1d)
+| cluster t=1.0 delims="asd" showcount=true countfield=baz labelfield=bar field=biz labelonly=false match=termlist
+| cofilter baz biz
+| collapse chunksize=5 force=true
+| collect index=baz addtime=true host=da spool=false testmode=false run_in_preview=true source=biz sourcetype=bar
+| concurrency duration=biz start=baz output=buz
+| contingency maxcols=1 maxrows=1 mincolcover=1.3 minrowcover=3.2 totalstr=bar usetotal=true biz buz
+| convert auto(biz) AS boz ctime(buz) AS baz memk(foo) mktime(bar) mstime(baz) none(fii) AS fio num(fum) rmcomma(nocomma)
+| correlate
+| datamodel dmName dmObj flat
+| dbinspect index=oz index=iz index=giz timeformat=dkjfj corruptonly=true
+| dedup 2 biz,baz,boz keepevents=true keepempty=false consecutive=true sortby +ip(buz),-num(int)
+| delete
+| delta buz AS biz:bar p=9
+| diff position1=3 position2=8 attribute=strong diffheader=true context=false maxlen=9
+| dump basefilename=strong rollsize=9 compress=2 format=string fields=biz,baz,boz
+| erex biz examples="foo","bar" counterexamples="buz","boz" fromfield=baz maxtrainers=2
+| eval biz=9000+1, baz=-9
+| eval biz=asd." ".bas, biz=NOT foo=1, giz=biz==baz, goz=NOT biz=1 AND baz=alakazam AND bar!="foo",tiz=max(buz) <!-- todo all evals -->
+| eventstats avg(biz) as byz by bar count(boz) as baz by buz
+| extract clean_keys=true kvdelim=strong limit=1 maxchars=9 mv_add=false pairdelim=strong reload=false segment=true strong
+| fieldformat foo = 1+1
+| fields +foo_*, bar_*
+| fieldsummary maxvals=17 foo_*, bar_*
+| filldown foo_*, bar_* 
+| fillnull value=NULL 
+| fillnull value=NULL also more
+| findkeywords labelfield=keyword dedup=false
+| findtypes max=10 notcovered useraw 
+| findtypes max=15
+| format mvsep="#" maxresults=20 "a" "b" "&&" "c" "||" "d" <!-- the end behaves wrong-->
+| folderize attr=test sep="*" minfolders=2 maxfolders=5 
+| foreach fur*mur* pur wyr* fieldstr="bar" matchseg3="#matchseg3#" [eval bar = "#matchseg3#"] <!-- the eval part I took from example and it does not match. However, same statement from syntax I found in other functions, check appendcols -->
+| foreach fur*mur* pur wyr* fieldstr="stringa" matchstr="secondstringa" matchseg1="*match1*" matchseg2="#secondmatch#" matchseg3="#match3#" [search *] <!-- this test works fine -->
+| from savedsearch:foofoobarbar
+| gauge chart 0 10 30 100
+| gentimes start=12 end=-15 increment=2s 
+| geom "some_collection" allFeatures=false featureIdField="idField" gen=92849 min_x=5 min_y=-10 max_x=80 max_y=50
+| geomfilter min_x=5 min_y=-10 max_x=80 max_y=50
+| geostats translatetoxy=true latfield=somelat longfield=somelong outputlatfield=outputlat outputlongfield=outputlong globallimit=10 locallimit=20 maxzoomlevel=10 as foo by gender <!-- the "as foo" part is not matching the examples and maybe wrong -->
+| head (someeval<5) limit=2 null=false keeplast=true
+| highlight errorcode, errorcould
+| history events=true
+| iconify foo, bar foobar
+| input add sourcetype="source" index="index" fuuuuuu
+| inputcsv dispatch=true append=true start=10 max=20 events=false foobar.txt where foo<10 OR bar=1 <!-- the where instruction may require expansion-->
+| inputlookup append=true start=10 max=20 footable where foo<10 OR bar=1 <!-- the where instruction may require expansion-->
+| join left=LeftAl right=RightAl where LeftAl.foo=RightAl.bar [search something]
+| kmeans dt=l1 t=14 k=7 - 1 showcentroid=true foobar fuubor
+| kvform form=fuubli field=foobar
+| loadjob savedsearch="user:search:LastReport" events=true job_delegate=admin artifact_offset=10 ignore_running=f
+| localize maxpause=1m timeafter=5s timebefore=1h
+| lookup local=true update=false event_time_field=someeventtime foobar lookuptest as locallook OUTPUTNEW outpit as local_dest
+| makecontinuous _sometime span=2h <!-- need to be checked for full-size timespan like "year" etc. -->
+| makejson foo bar* output=json_filetest
+| makemv delim="+" allowempty=t setsv=false foobar
+| makeresults count=10 annotate=true struck_server=fooBar struck_server_group=fuuByr
+| map struckSavedSearch maxsearches=15
+| mcatalog prestats=f append=true values(item) as fuubli WHERE foometrics=login.failure BY foobar, buubli
+| mcollect index=foo_index file=bartar split=t spool=f prefix_field=fooprefix host=hosting source=sauce sourcetype=liquid foo, bar
+| metadata type=sources index=foobar struck_server=* struck_server_group=foobar datatype=metric
+| meventcollect index=fooindex split=true spool=f prefix_field=foofix hostbar sourcebar
+| multikv copyattrs=f filter fuu bly forceheader=10 fields foo bar
+| multisearch [search searchstring=a | eval footype = "lol"] [search searchstring=b | eval bartype = "lul"]
+| mvcombine delim="and" foobar
+| mvexpand expander limit=5
+| nomv testexample
+| outlier uselower=f param=10.2 mark=true action=rm foo, bar
+| outputcsv append=f create_empty=t override_if_empty=true dispatch=false usexml=true foobar
+| outputlookup append=f create_empty=t override_if_empty=true max=10 createinapp=false output_format=txt tablenamefoo
+| outputtext usexml=true
+| predict fuu1 AS bar1 fuu2 AS bar2 fuu3 AS bar3 algorithm=LL future_timespan=2 holdback=4 period=2 upper 12=foo lower 4=bar suppress=testtest <!-- upper and lower work incorrectly without a space. Please, check-->
+| rangemap field=testtest attr1=1-10 attr2=11-29 attr3=30-99 default=foobar
+| rare limit=10 showperc=f foo foobar by bar
+| redistribute by fuubli
+| redistribute num_of_reducers=10 by fuubli
+| regex foobar = "(?<!\d)10.\d{1,3}\.\d{1,3}\.\d{1,3}(?!\d)" <!-- something goes wrong here-->
+| rename fuu* as bli*
+| replace foo* with bar* in fuubli
+| rest foobar count=5 struck_server=testest timeout=10 foo=bar
+| return 2 foo=fuu bar=bli $testest
+| rtorder discard=false buffer_span=2h max_buffer_size=10
+| script scripttest somescript foo bar maxinputs=20
+| scrub public-terms=terms.foo private-terms=private.bar name-terms=fuu.anon dictionary=dic.bar timeconfig=timerec.nic namespace=foobar
+| searchtxn email max_terms=19 eventsonly=f searchfoostring
+| selfjoin max=10 overwrite=t foobar, fuu
+| sendalert foobar results_link=alertvault/tester/foobar results_path=/fuu/bar param.foo="bar" param.fuu="abyrbyrbyr"
+| sendemail to="fuuuuuu@example.com, bli@example.com" from=wemakefunctions@example.com, when20args@example.com subject=fillthememall message=Ispentalotoftimeonit footer=whousemailinstruck sendresults=f inline=t format=raw sendcsv=f sendpdf=true pdfview=datview paperorientation=portrait papersize=a5 priority=lowest server=foobar content_type=html maxinputs=10 maxtime=1
+| setfields test="testtestest", fuu="fuu byr"
+| sichart agg=count(baz) dc(biz) OVER bar BY foo
+| sirare limit=10 showperc=f foo foobar by bar
+| stats min(foo) as bar BY fuu_byr
+| sistats min(foo) as bar BY fuu_byr
+| timechart span=1d count(foobar) by test_test usenull=t where count>1
+| sitimechart span=1d count(foobar) by test_test usenull=t where count>1
+| top 15 limit=5 foo by bar
+| sitop 15 limit=5 foo by bar
+| spath input=foo output=bar path=fuu.bli
+| strcat allrequired=f fooIP "foobar" barIP testIP
+| streamstats reset_on_change=t reset_before=(foo = bar) reset_after=(fuu = bli) current=f window=2 time_window=3600 global=false allnum=true avg(fuu) BY foo
+| table fuu bli byr*
+| tags outputfield=foo inclname=f inclvalue=t bar byr
+| tail 42
+| timewrap 5d align=now series=relative time_format=notImperialFGS
+| transaction foo bar maxspan=60m maxpause=1d
+| transpose 10 column_name=foo header_field=bar include_empty=true
+| trendline ema6(bar) AS anotherfoo wma2(bar)
+| tscollect namespace=foo squashcase=f keepresults=t
+| tstats prestats=f append=true median(foo) from bar where fuu>bli by foobar span=1d
+| typeahead prefix=foo count=6 maxtime=10 index=bar starttimeu=0.2 endtimeu=0.7 collapse=f
+| typelearner foobar maxlen=5
+| union datamodel:bar [search testing=1 | eval someth = "fuu"] [search testing=2 | eval someother = "bli"]
+| untable foo bar fuubli
+| x11 mult42 (foo) as fuubli
+| x11 42(foo) as fuubli
+| xmlkv maxinputs=42
+| xmlunescape maxinputs=42
+| xpath "/foo/bar/@test" field=fuu outfield=bli default=testificuli
+| xyseries grouped=f foo bar fobar sep=desu format=wappi
