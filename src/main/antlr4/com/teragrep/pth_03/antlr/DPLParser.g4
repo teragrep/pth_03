@@ -59,7 +59,7 @@ root
 
 searchTransformationRoot
         : directoryStatement
-        | (logicalStatement AND?)*? directoryStatement (AND? logicalStatement)*?
+        | (logicalStatement AND*?)*? directoryStatement (AND*? logicalStatement)*?
         | directoryStatement OR logicalStatement
         | logicalStatement
         ;
@@ -69,7 +69,7 @@ directoryStatement
         | indexStatement
         | directoryStatement OR directoryStatement
         | directoryStatement (AND*? logicalStatement)+
-        | (logicalStatement AND? )+ directoryStatement
+        | (logicalStatement AND*? )+ directoryStatement
         ;
 
 subindexStatement
@@ -77,10 +77,10 @@ subindexStatement
         ;
 
 indexStatement
-        : INDEX_EQ (stringType GET_STRING_WILDCARD? | GET_STRING_WILDCARD)
-        | INDEX_SPACE (stringType GET_STRING_WILDCARD? | GET_STRING_WILDCARD) //CHECK PRIORITY
-        | INDEX_NEG (stringType GET_STRING_WILDCARD? | GET_STRING_WILDCARD)
-        | INDEX_SPACE_NEG (stringType GET_STRING_WILDCARD? | GET_STRING_WILDCARD)
+        : INDEX_EQ (stringType | WILDCARD)
+        | INDEX_SPACE (stringType | WILDCARD) //CHECK PRIORITY
+        | INDEX_NEG (stringType | WILDCARD)
+        | INDEX_SPACE_NEG (stringType | WILDCARD)
         ;
 
 logicalStatement
@@ -112,7 +112,7 @@ timeFormatQualifier
         ;
 
 searchIndexStatement //FIXME tests plz
-        : stringType WILDCARD?
+        : stringType
         | WILDCARD
         | termStatement
         | caseStatement
@@ -146,25 +146,25 @@ timeQualifier
         ;
 
 comparisonStatement
-        : fieldOrStringType (EQ|NEQ|LT|LTE|GT|GTE) (integerType|stringType)
+        : fieldOrStringType (EQ|NEQ|LT|LTE|GT|GTE) (integerType|stringType|WILDCARD)
         | fieldValueInListStatement
-        | INDEX_EQ (stringType GET_STRING_WILDCARD? | GET_STRING_WILDCARD)
-        | INDEX_SPACE (stringType GET_STRING_WILDCARD? | GET_STRING_WILDCARD) //CHECK PRIORITY
-        | INDEX_NEG (stringType GET_STRING_WILDCARD? | GET_STRING_WILDCARD)
-        | INDEX_SPACE_NEG (stringType GET_STRING_WILDCARD? | GET_STRING_WILDCARD)
+        | INDEX_EQ (stringType | WILDCARD)
+        | INDEX_SPACE (stringType | WILDCARD) //CHECK PRIORITY
+        | INDEX_NEG (stringType | WILDCARD)
+        | INDEX_SPACE_NEG (stringType | WILDCARD)
         ;
 
 searchQualifier
         : INDEX_IN GET_INDEX_STRING_BRACKET_L indexStringType (COMMA? indexStringType)* GET_INDEX_STRING_BRACKET_R
-        | SOURCETYPE (EQ|NEQ) (stringType WILDCARD?|WILDCARD)
+        | SOURCETYPE (EQ|NEQ) (stringType | WILDCARD)
         | SOURCETYPE IN PARENTHESIS_L stringType (COMMA? stringType)* PARENTHESIS_R
-        | HOST (EQ|NEQ) (stringType WILDCARD? | WILDCARD)
-        | SOURCE (EQ|NEQ) (stringType WILDCARD?| WILDCARD)
-        | SAVEDSEARCH (EQ|NEQ) (stringType WILDCARD?| WILDCARD )
-        | EVENTTYPE (EQ|NEQ) (stringType WILDCARD?| WILDCARD)
-        | EVENTTYPETAG (EQ|NEQ) (stringType WILDCARD?| WILDCARD)
-        | HOSTTAG (EQ|NEQ) (stringType WILDCARD?|WILDCARD)
-        | TAG (EQ|NEQ) (stringType WILDCARD?| WILDCARD)
+        | HOST (EQ|NEQ) (stringType | WILDCARD)
+        | SOURCE (EQ|NEQ) (stringType | WILDCARD)
+        | SAVEDSEARCH (EQ|NEQ) (stringType | WILDCARD )
+        | EVENTTYPE (EQ|NEQ) (stringType | WILDCARD)
+        | EVENTTYPETAG (EQ|NEQ) (stringType | WILDCARD)
+        | HOSTTAG (EQ|NEQ) (stringType |WILDCARD)
+        | TAG (EQ|NEQ) (stringType | WILDCARD)
         ;
 
 termStatement
@@ -184,21 +184,16 @@ whereStatement
         ;
 
 // types
-booleanType //check
+booleanType
         : GET_BOOLEAN_TRUE
         | GET_BOOLEAN_FALSE
         | GET_BOOLEAN_SPLIT
         ;
 
-fieldType // nothing special in parsing, only while using
+fieldType
         : GET_FIELD_SINGLE_QUOTED
         | GET_FIELD_DOUBLE_QUOTED
         | GET_FIELD_STRING
-        ;
-
-fieldOrStringType
-        : fieldType
-        | stringType
         ;
 
 
@@ -267,6 +262,9 @@ stringType
         | GET_STRING_DOUBLE_QUOTED
         | GET_STRING_STRING
         | GET_STRING_WILDCARD
-        // FIXME REMOVE THESE -v
-        ;        
+        ;
 
+fieldOrStringType
+        : fieldType
+        | stringType
+        ;
