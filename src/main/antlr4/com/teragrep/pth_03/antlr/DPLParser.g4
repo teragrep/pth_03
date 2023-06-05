@@ -59,7 +59,7 @@ root
 
 searchTransformationRoot
         : directoryStatement
-        | (logicalStatement AND*?)*? directoryStatement (AND*? logicalStatement)*?
+        | (logicalStatement AND?)*? directoryStatement (AND? logicalStatement)*?
         | directoryStatement OR logicalStatement
         | logicalStatement
         ;
@@ -69,7 +69,7 @@ directoryStatement
         | indexStatement
         | directoryStatement OR directoryStatement
         | directoryStatement (AND*? logicalStatement)+
-        | (logicalStatement AND*? )+ directoryStatement
+        | (logicalStatement AND? )+ directoryStatement
         ;
 
 subindexStatement
