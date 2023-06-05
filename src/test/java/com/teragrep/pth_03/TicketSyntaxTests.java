@@ -146,6 +146,13 @@ public class TicketSyntaxTests {
             "ticket102",
             "ticket109",
             "ticket112",
+            "ticket120",
+            "ticket121",
+            "ticket120_1",
+            "ticket120_2",
+            "ticket122",
+            "ticket122_1",
+            "ticket123",
             "ticket192",
             "ticket255",
             "ticket241PTH10"
@@ -204,7 +211,7 @@ public class TicketSyntaxTests {
     void xpathTest4(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/tickets/" + arg + ".txt";
-        String xpathExp = "/root/searchTransformationRoot/directoryStatement/directoryStatement/directoryStatement/directoryStatement[2]/indexStatement/stringType/value";
+        String xpathExp = "/root/searchTransformationRoot/directoryStatement/directoryStatement/directoryStatement/directoryStatement[1]/indexStatement/stringType/value";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
@@ -218,7 +225,7 @@ public class TicketSyntaxTests {
     void xpathTest5(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/tickets/" + arg + ".txt";
-        String xpathExp = "/root/searchTransformationRoot/directoryStatement/directoryStatement/directoryStatement[2]/indexStatement/stringType/value";
+        String xpathExp = "/root/searchTransformationRoot/directoryStatement/directoryStatement/directoryStatement[1]/indexStatement/stringType/value";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
@@ -232,7 +239,7 @@ public class TicketSyntaxTests {
     void xpathTest6(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/tickets/" + arg + ".txt";
-        String xpathExp = "/root/searchTransformationRoot/directoryStatement/directoryStatement/subindexStatement/directoryStatement/directoryStatement[2]/indexStatement/stringType/value";
+        String xpathExp = "/root/searchTransformationRoot/directoryStatement/logicalStatement/sublogicalStatement/logicalStatement/logicalStatement[1]/timeStatement/timeQualifier/timeType";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
@@ -246,7 +253,7 @@ public class TicketSyntaxTests {
     void xpathTest7(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/tickets/" + arg + ".txt";
-        String xpathExp = "/root/searchTransformationRoot/directoryStatement/directoryStatement[1]/subindexStatement/directoryStatement/directoryStatement/subindexStatement/directoryStatement";
+        String xpathExp = "/root/searchTransformationRoot/directoryStatement/directoryStatement[2]/subindexStatement/directoryStatement/logicalStatement/sublogicalStatement/logicalStatement/logicalStatement[2]/timeStatement/timeQualifier/value";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
@@ -260,7 +267,35 @@ public class TicketSyntaxTests {
     void xpathTest8(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/tickets/" + arg + ".txt";
-        String xpathExp = "/root/searchTransformationRoot/directoryStatement/directoryStatement[2]/subindexStatement/directoryStatement/subindexStatement/directoryStatement/indexStatement/stringType/value";
+        String xpathExp = "/root/searchTransformationRoot/directoryStatement/directoryStatement[2]/subindexStatement/directoryStatement/subindexStatement/directoryStatement/indexStatement/value";
+
+        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        // Check that 1 found
+        assertEquals(1,nodesA.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "ticket120_1",
+    })
+    void xpathTest9(String arg) throws Exception {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/tickets/" + arg + ".txt";
+        String xpathExp = "/root/searchTransformationRoot/directoryStatement/directoryStatement/logicalStatement/logicalStatement[2]/timeStatement/timeQualifier/timeType/value";
+
+        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        // Check that 1 found
+        assertEquals(1,nodesA.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "ticket121",
+    })
+    void xpathTest10(String arg) throws Exception {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/tickets/" + arg + ".txt";
+        String xpathExp = "/root/searchTransformationRoot/directoryStatement/logicalStatement/timeStatement/timeQualifier/value";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found

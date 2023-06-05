@@ -46,7 +46,9 @@
 parser grammar DPLParserTransform_iplocation;
 
 iplocationTransformation
-        : COMMAND_MODE_IPLOCATION (t_iplocation_prefixParameter)? (t_iplocation_allFieldsParameter)? (t_iplocation_langParameter)? fieldType
+        : COMMAND_MODE_IPLOCATION (t_iplocation_prefixParameter (t_iplocation_allFieldsParameter | t_iplocation_langParameter)? (t_iplocation_allFieldsParameter | t_iplocation_langParameter)?
+        | t_iplocation_allFieldsParameter (t_iplocation_langParameter|t_iplocation_prefixParameter)? (t_iplocation_langParameter|t_iplocation_prefixParameter)?
+        | t_iplocation_langParameter (t_iplocation_allFieldsParameter | t_iplocation_prefixParameter)? (t_iplocation_allFieldsParameter | t_iplocation_prefixParameter)?)? fieldType
         ;
 
 

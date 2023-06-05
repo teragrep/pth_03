@@ -50,7 +50,14 @@ teragrepTransformation
         ;
 
 t_execParameter
-        : COMMAND_TERAGREP_MODE_EXEC (t_syslogModeParameter | t_listModeParameter | t_saveModeParameter | t_parserExplainParameter | t_deleteModeParameter | t_loadModeParameter | t_kafkaSaveModeParameter)
+        : COMMAND_TERAGREP_MODE_EXEC (t_syslogModeParameter
+        | t_listModeParameter
+        | t_saveModeParameter
+        | t_parserExplainParameter
+        | t_deleteModeParameter
+        | t_loadModeParameter
+        | t_kafkaSaveModeParameter
+        | t_bloomModeParameter)
         ;
 
 t_syslogModeParameter
@@ -59,6 +66,10 @@ t_syslogModeParameter
 
 t_kafkaSaveModeParameter
         : COMMAND_TERAGREP_MODE_KAFKA COMMAND_TERAGREP_MODE_SAVE  t_topicParameter
+        ;
+
+t_bloomModeParameter
+        : COMMAND_TERAGREP_MODE_BLOOM t_bloomOptionParameter
         ;
 
 t_parserExplainParameter
@@ -83,6 +94,10 @@ t_listModeParameter
 
 t_getParameter
         : (COMMAND_TERAGREP_MODE_GET | COMMAND_TERAGREP_MODE_SET) COMMAND_TERAGREP_MODE_SYSTEM COMMAND_TERAGREP_MODE_VERSION numberType?
+        ;
+
+t_bloomOptionParameter
+        : COMMAND_TERAGREP_MODE_UPDATE | COMMAND_TERAGREP_MODE_CREATE
         ;
 
 t_hostParameter

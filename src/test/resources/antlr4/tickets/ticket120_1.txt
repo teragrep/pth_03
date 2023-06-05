@@ -43,4 +43,6 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */ -->
-index != "haproxy" OR sourcetype = "example:haproxy:haproxy"
+sourcetype="example:rsyslog:rsyslogd" -- MARK -- host="host-one.example.com" OR host=host-two.example.com latest=-2min index=rsyslogd
+OR index="_audit"
+OR index=* OR index=** OR index=*** OR index=**** -- _time=* linecount=* host=* earliest=-30min
