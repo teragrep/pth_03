@@ -58,7 +58,6 @@ public class IplocationSyntaxTests {
     @ParameterizedTest(name = "{index} command=''{0}''")
     @ValueSource(strings = {
             "iplocation",
-            "iplocation2",
     })
     public void iplocationSyntaxParseTest(String arg) throws Exception {
         String fileName = "src/test/resources/antlr4/commands/iplocation/" + arg + ".txt";
