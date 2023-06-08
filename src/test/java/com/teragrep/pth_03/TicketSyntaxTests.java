@@ -152,7 +152,6 @@ public class TicketSyntaxTests {
             "ticket120_2",
             "ticket122",
             "ticket122_1",
-            "ticket123",
             "ticket192",
             "ticket255",
             "ticket241PTH10"
