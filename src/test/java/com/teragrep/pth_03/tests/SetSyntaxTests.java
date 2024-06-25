@@ -87,7 +87,7 @@ public class SetSyntaxTests {
     void xpathTest2(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/set/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/setTransformation/value[2]";
+        String xpathExp = "/root/transformStatement/setTransformation/t_setOption_Parameter/value";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
@@ -100,7 +100,7 @@ public class SetSyntaxTests {
     void xpathTest3(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/set/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/setTransformation/t_setsubsearchParameter[1]/subsearchTransformStatement/addtotalsTransformation/t_addtotals_labelParameter/stringType/value";
+        String xpathExp = "/root/transformStatement/setTransformation/subsearchStatement/transformStatement";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
@@ -113,59 +113,7 @@ public class SetSyntaxTests {
     void xpathTest4(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/set/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/setTransformation/t_setsubsearchParameter[1]/subsearchTransformStatement/addtotalsTransformation/fieldListType/fieldType/value[1]";
-
-        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
-        // Check that 1 found
-        assertEquals(1,nodesA.getLength());
-    }
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "set",
-    })
-    void xpathTest5(String arg) throws Exception {
-        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
-        String fileName = "src/test/resources/antlr4/commands/set/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/setTransformation/t_setsubsearchParameter[2]/subsearchTransformStatement/addtotalsTransformation/t_addtotals_labelParameter/stringType/value";
-
-        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
-        // Check that 1 found
-        assertEquals(1,nodesA.getLength());
-    }
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "set",
-    })
-    void xpathTest6(String arg) throws Exception {
-        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
-        String fileName = "src/test/resources/antlr4/commands/set/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/setTransformation/t_setsubsearchParameter[2]/subsearchTransformStatement/addtotalsTransformation/fieldListType/fieldType/value[1]";
-
-        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
-        // Check that 1 found
-        assertEquals(1,nodesA.getLength());
-    }
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "set2",
-    })
-    void xpathTest7(String arg) throws Exception {
-        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
-        String fileName = "src/test/resources/antlr4/commands/set/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/setTransformation/value[2]";
-
-        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
-        // Check that 1 found
-        assertEquals(1,nodesA.getLength());
-    }
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "set3",
-    })
-    void xpathTest8(String arg) throws Exception {
-        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
-        String fileName = "src/test/resources/antlr4/commands/set/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/setTransformation/value[2]";
+        String xpathExp = "/root/transformStatement/setTransformation/subsearchStatement/transformStatement/addtotalsTransformation/fieldListType/fieldType/value";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found

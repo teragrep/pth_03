@@ -46,17 +46,24 @@
 parser grammar DPLParserTransform_rangemap;
 
 rangemapTransformation
-        : COMMAND_MODE_RANGEMAP t_rangemap_fieldParameter (t_rangemap_attrnParameter)+ (t_rangemap_defaultParameter)?
+        : COMMAND_MODE_RANGEMAP t_rangemap_fieldParameter (t_rangemap_attrnParameter)* (t_rangemap_defaultParameter)?
+        ;
+
+t_rangemap_rangeParameter
+        : GET_RANGE_NUMBER_LEFT t_rangemap_rangeRightParameter
+        ;
+
+t_rangemap_rangeRightParameter
+        : GET_RANGE_NUMBER_RIGHT
+        ;
+
+t_rangemap_defaultParameter
+        : COMMAND_RANGEMAP_MODE_DEFAULT stringType
         ;
 
 
 t_rangemap_attrnParameter
-        : stringType COMMAND_RANGEMAP_MODE_EQ integerType
-        ;
-
-
-t_rangemap_defaultParameter
-        : COMMAND_RANGEMAP_MODE_DEFAULT stringType
+        : stringType COMMAND_RANGEMAP_MODE_EQ t_rangemap_rangeParameter
         ;
 
 

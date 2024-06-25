@@ -45,15 +45,17 @@
  */ -->
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <root>
+    <value>|</value>
     <transformStatement>
-        <value>|</value>
         <setTransformation>
             <value>set</value>
-            <value>intersect</value>
-            <t_setsubsearchParameter>
+            <t_setOption_Parameter>
+                <value>intersect</value>
+            </t_setOption_Parameter>
+            <subsearchStatement>
                 <value>[</value>
                 <value>|</value>
-                <subsearchTransformStatement>
+                <transformStatement>
                     <addtotalsTransformation>
                         <value>addtotals</value>
                         <t_addtotals_labelParameter>
@@ -68,34 +70,10 @@
                             </fieldType>
                         </fieldListType>
                     </addtotalsTransformation>
-                </subsearchTransformStatement>
+                </transformStatement>
                 <value>]</value>
-            </t_setsubsearchParameter>
-            <t_setsubsearchParameter>
-                <value>[</value>
-                <value>|</value>
-                <subsearchTransformStatement>
-                    <addtotalsTransformation>
-                        <value>addtotals</value>
-                        <t_addtotals_labelParameter>
-                            <value>label=</value>
-                            <stringType>
-                                <value>ddd</value>
-                            </stringType>
-                        </t_addtotals_labelParameter>
-                        <fieldListType>
-                            <fieldType>
-                                <value>ssubbbb</value>
-                            </fieldType>
-                        </fieldListType>
-                    </addtotalsTransformation>
-                </subsearchTransformStatement>
-                <value>]</value>
-            </t_setsubsearchParameter>
+            </subsearchStatement>
         </setTransformation>
-        <transformStatement>
-            <EOF/>
-        </transformStatement>
     </transformStatement>
 </root>
  

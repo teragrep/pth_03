@@ -45,8 +45,8 @@
  */ -->
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <root>
+    <value>|</value>
     <transformStatement>
-        <value>|</value>
         <rangemapTransformation>
             <value>rangemap</value>
             <t_rangemap_fieldParameter>
@@ -60,27 +60,36 @@
                     <value>attr1</value>
                 </stringType>
                 <value>=</value>
-                <integerType>
-                    <value>1-10</value>
-                </integerType>
+                <t_rangemap_rangeParameter>
+                    <value>1-</value>
+                    <t_rangemap_rangeRightParameter>
+                        <value>10</value>
+                    </t_rangemap_rangeRightParameter>
+                </t_rangemap_rangeParameter>
             </t_rangemap_attrnParameter>
             <t_rangemap_attrnParameter>
                 <stringType>
                     <value>attr2</value>
                 </stringType>
                 <value>=</value>
-                <integerType>
-                    <value>11-29</value>
-                </integerType>
+                <t_rangemap_rangeParameter>
+                    <value>11-</value>
+                    <t_rangemap_rangeRightParameter>
+                        <value>29</value>
+                    </t_rangemap_rangeRightParameter>
+                </t_rangemap_rangeParameter>
             </t_rangemap_attrnParameter>
             <t_rangemap_attrnParameter>
                 <stringType>
                     <value>attr3</value>
                 </stringType>
                 <value>=</value>
-                <integerType>
-                    <value>30-99</value>
-                </integerType>
+                <t_rangemap_rangeParameter>
+                    <value>30-</value>
+                    <t_rangemap_rangeRightParameter>
+                        <value>99</value>
+                    </t_rangemap_rangeRightParameter>
+                </t_rangemap_rangeParameter>
             </t_rangemap_attrnParameter>
             <t_rangemap_defaultParameter>
                 <value>default=</value>
@@ -89,8 +98,5 @@
                 </stringType>
             </t_rangemap_defaultParameter>
         </rangemapTransformation>
-        <transformStatement>
-            <EOF/>
-        </transformStatement>
     </transformStatement>
 </root>

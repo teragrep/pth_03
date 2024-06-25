@@ -61,6 +61,8 @@ public class TicketSyntaxTests {
             "ticket13",
             "ticket15",
             "ticket16",
+            "ticket18_g",
+            "ticket_2_g",
             "ticket17",
             "ticket18",
             "ticket19",
@@ -154,6 +156,7 @@ public class TicketSyntaxTests {
             "ticket122_1",
             "ticket192",
             "ticket255",
+            "ticket169_pth10",
             "ticket241PTH10"
     })
     public void syntaxParseTest(String arg) throws Exception {

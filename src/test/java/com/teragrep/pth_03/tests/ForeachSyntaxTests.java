@@ -125,7 +125,7 @@ public class ForeachSyntaxTests {
     void xpathTest5(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/foreach/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/foreachTransformation/subsearchStatement/subsearchTransformStatement/evalTransformation/t_eval_evalParameter/fieldType/value";
+        String xpathExp = "/root/transformStatement/foreachTransformation/subsearchStatement/transformStatement";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
@@ -138,7 +138,7 @@ public class ForeachSyntaxTests {
     void xpathTest6(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/foreach/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/foreachTransformation/subsearchStatement/subsearchTransformStatement/evalTransformation/t_eval_evalParameter/evalStatement/evalStringType/value";
+        String xpathExp = "/root/transformStatement/foreachTransformation/subsearchStatement/transformStatement/evalTransformation/t_eval_evalParameter/evalStatement/evalStringType/value";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found

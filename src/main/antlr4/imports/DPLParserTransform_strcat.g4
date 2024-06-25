@@ -46,7 +46,7 @@
 parser grammar DPLParserTransform_strcat;
 
 strcatTransformation
-        : COMMAND_MODE_STRCAT (t_strcat_allrequiredParameter)? t_strcat_srcfieldsParameter fieldType
+        : COMMAND_MODE_STRCAT (t_strcat_allrequiredParameter)? t_strcat_srcfieldsParameter t_strcat_destfieldParameter
         ;
 
 
@@ -59,3 +59,6 @@ t_strcat_srcfieldsParameter
         : (fieldType | stringType) (fieldType | stringType)+
         ;
 
+t_strcat_destfieldParameter
+        : fieldType
+        ;

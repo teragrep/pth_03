@@ -45,18 +45,17 @@
  */ -->
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <root>
+    <value>|</value>
     <transformStatement>
-        <value>|</value>
         <teragrepTransformation>
             <value>teragrep</value>
             <t_getParameter>
                 <value>get</value>
-                <value>system</value>
-                <value>version</value>
+                <t_getTeragrepVersionParameter>
+                    <value>system</value>
+                    <value>version</value>
+                </t_getTeragrepVersionParameter>
             </t_getParameter>
         </teragrepTransformation>
-        <transformStatement>
-            <EOF/>
-        </transformStatement>
     </transformStatement>
 </root>

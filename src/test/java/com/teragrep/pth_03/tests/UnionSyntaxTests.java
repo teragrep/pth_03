@@ -111,7 +111,7 @@ public class UnionSyntaxTests {
     void xpathTest4(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/union/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/unionTransformation/t_union_datasetParameter[3]/t_union_unnamedDatasetParameter/subsearchStatement/subsearchTransformStatement/searchTransformation/searchTransformationRoot/directoryStatement/indexStatement/stringType/value";
+        String xpathExp = "/root/transformStatement/unionTransformation/t_union_datasetParameter[3]/t_union_unnamedDatasetParameter/subsearchStatement/transformStatement/searchTransformation/searchTransformationRoot/directoryStatement/indexStatement/stringType/value";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found

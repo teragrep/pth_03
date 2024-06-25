@@ -156,9 +156,9 @@ public class AppendcolsSyntaxTests {
     void xpathTest7(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/appendcols/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/appendcolsTransformation/subsearchStatement/subsearchTransformStatement";
+        String xpathExp = "/root/transformStatement/appendcolsTransformation/subsearchStatement/transformStatement";
 
-        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, true);
         // Check that 1 found
         assertEquals(1,nodesA.getLength());
     }

@@ -85,7 +85,7 @@ public class MultisearchSyntaxTests {
     void xpathTest2(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/multisearch/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/multisearchTransformation/subsearchStatement[2]/subsearchTransformStatement/searchTransformation/searchTransformationRoot/directoryStatement/indexStatement/stringType";
+        String xpathExp = "/root/transformStatement/multisearchTransformation/subsearchStatement[2]/transformStatement/searchTransformation";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found

@@ -54,7 +54,7 @@ import DPLParserTransform;
 options { tokenVocab=DPLLexer; }
 
 root
-        : searchTransformationRoot? transformStatement
+        : searchTransformationRoot? (PIPE transformStatement)?
         ;
 
 searchTransformationRoot
@@ -104,7 +104,7 @@ sublogicalStatement
         ;
         
 subsearchStatement
-        : BRACKET_L COMMAND_MODE_PIPE? subsearchTransformStatement BRACKET_R
+        : BRACKET_L PIPE? transformStatement BRACKET_R
         ;
 
 timeFormatQualifier

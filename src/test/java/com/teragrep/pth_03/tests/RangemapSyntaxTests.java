@@ -67,7 +67,7 @@ public class RangemapSyntaxTests {
     }
     @ParameterizedTest
     @ValueSource(strings = {
-            "rangemap",
+            "rangemap"
     })
     void xpathTest1(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
@@ -80,7 +80,7 @@ public class RangemapSyntaxTests {
     }
     @ParameterizedTest
     @ValueSource(strings = {
-            "rangemap",
+            "rangemap"
     })
     void xpathTest2(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
@@ -95,7 +95,7 @@ public class RangemapSyntaxTests {
     }
     @ParameterizedTest
     @ValueSource(strings = {
-            "rangemap",
+            "rangemap"
     })
     void xpathTest3(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
@@ -110,13 +110,13 @@ public class RangemapSyntaxTests {
     }
     @ParameterizedTest
     @ValueSource(strings = {
-            "rangemap",
+            "rangemap"
     })
     void xpathTest4(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/rangemap/" + arg + ".txt";
 
-        String xpathExp = "/root/transformStatement/rangemapTransformation/t_rangemap_attrnParameter[1]/integerType/value";
+        String xpathExp = "/root/transformStatement/rangemapTransformation/t_rangemap_attrnParameter[1]/t_rangemap_rangeParameter";
 
         NodeList nodes = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
@@ -126,16 +126,47 @@ public class RangemapSyntaxTests {
     @ParameterizedTest
     @ValueSource(strings = {
             "rangemap",
+            "rangemap2"
     })
     void xpathTest5(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/rangemap/" + arg + ".txt";
 
-        String xpathExp = "/root/transformStatement/rangemapTransformation/t_rangemap_defaultParameter/stringType/value";
+        String xpathExp = "/root/transformStatement/rangemapTransformation/" +
+                "t_rangemap_attrnParameter[1]/t_rangemap_rangeParameter/t_rangemap_rangeRightParameter";
 
         NodeList nodes = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
         assertEquals(1,nodes.getLength());
+    }
 
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "rangemap4"
+    })
+    void xpathTest6(String arg) throws Exception {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/rangemap/" + arg + ".txt";
+
+        String xpathExp = "/root/transformStatement/rangemapTransformation/t_rangemap_fieldParameter/fieldType";
+
+        NodeList nodes = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        // Check that 1 found
+        assertEquals(1,nodes.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "rangemap3"
+    })
+    void xpathTest7(String arg) throws Exception {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/rangemap/" + arg + ".txt";
+
+        String xpathExp = "/root/transformStatement/rangemapTransformation/t_rangemap_defaultParameter/stringType";
+
+        NodeList nodes = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        // Check that 1 found
+        assertEquals(1,nodes.getLength());
     }
 }
