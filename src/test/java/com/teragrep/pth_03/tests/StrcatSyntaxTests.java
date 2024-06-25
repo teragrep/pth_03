@@ -111,7 +111,7 @@ public class StrcatSyntaxTests {
     void xpathTest4(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/strcat/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/strcatTransformation/fieldType/value";
+        String xpathExp = "/root/transformStatement/strcatTransformation/t_strcat_destfieldParameter/fieldType/value";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found

@@ -60,10 +60,9 @@ COMMAND_RANGEMAP_MODE_PIPE: '|' -> type(PIPE), popMode;
 COMMAND_RANGEMAP_MODE_BRACKET_R: ']' -> type(BRACKET_R), popMode, popMode;
 
 // tokens
-
 COMMAND_RANGEMAP_MODE_DEFAULT : 'default=' -> pushMode(GET_STRING);
 COMMAND_RANGEMAP_MODE_FIELD : 'field=' -> pushMode(GET_FIELD);
-COMMAND_RANGEMAP_MODE_EQ : '=' -> pushMode(GET_INTEGER);
+COMMAND_RANGEMAP_MODE_EQ : '=' -> pushMode(GET_RANGE);
 COMMAND_RANGEMAP_MODE_SINGLE_QUOTE: '\'' ( '\\'. | ~('\''| '\\') )* '\'' -> type(GET_STRING_SINGLE_QUOTED);
 COMMAND_RANGEMAP_MODE_DQSTRING: '"' ( '\\'. | '""' | ~('"'| '\\') )* '"' -> type(GET_STRING_DOUBLE_QUOTED);
 // characters for string
@@ -162,10 +161,23 @@ fragment COMMAND_RANGEMAP_MODE_CHAR
          |'\u007E' // ~
          |'\u007F'..'\uFFFF' // DEL .. inf
          ;
-         
+
 COMMAND_RANGEMAP_MODE_STRING
         // one or more characters
         : (COMMAND_RANGEMAP_MODE_CHAR)+ -> type(GET_STRING_STRING);
+
+mode GET_RANGE;
+// skip
+GET_RANGE_SPACE: SPACE -> channel(HIDDEN);
+
+// tokens
+fragment DOT: '.';
+fragment MINUS: '-';
+fragment GET_RANGE_NUMBER: (MINUS)? [0-9]+ (DOT [0-9]+)?;
+GET_RANGE_NUMBER_LEFT: GET_RANGE_NUMBER '-' ;
+GET_RANGE_NUMBER_RIGHT: GET_RANGE_NUMBER -> popMode ;
+GET_RANGE_DOUBLE_QUOTED: '"' ( '\\'. | ~('"'| '\\') )* '"' -> popMode;
+
 COMMAND_RANGEMAP_MODE_COMMENT: '<!--' .*? '-->' -> channel(DPLCOMMENT);
 
 COMMAND_RANGEMAP_SUBMODE_SPAN_COMMENT: '<!--' .*? '-->' -> channel(DPLCOMMENT);

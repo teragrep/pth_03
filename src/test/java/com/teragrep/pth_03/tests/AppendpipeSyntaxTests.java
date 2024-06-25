@@ -100,7 +100,7 @@ public class AppendpipeSyntaxTests {
     void xpathTest3(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/appendpipe/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement[1]/appendpipeTransformation[1]/subsearchStatement[1]/subsearchTransformStatement[1]";
+        String xpathExp = "/root/transformStatement/appendpipeTransformation/subsearchStatement/transformStatement/addtotalsTransformation";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found

@@ -85,8 +85,8 @@ class ParseTreeToXmlTest {
                 "            </logicalStatement>\n" +
                 "        </directoryStatement>\n" +
                 "    </searchTransformationRoot>\n" +
+                "    <value>|</value>\n" +
                 "    <transformStatement>\n" +
-                "        <value>|</value>\n" +
                 "        <chartTransformation>\n" +
                 "            <value>chart</value>\n" +
                 "            <t_chart_aggregationInstruction>\n" +
@@ -115,8 +115,8 @@ class ParseTreeToXmlTest {
                 "                </t_row_Parameter>\n" +
                 "            </t_chart_by_column_rowOptions>\n" +
                 "        </chartTransformation>\n" +
+                "        <value>|</value>\n" +
                 "        <transformStatement>\n" +
-                "            <value>|</value>\n" +
                 "            <whereTransformation>\n" +
                 "                <value>where</value>\n" +
                 "                <evalStatement>\n" +
@@ -133,9 +133,6 @@ class ParseTreeToXmlTest {
                 "                    </evalStatement>\n" +
                 "                </evalStatement>\n" +
                 "            </whereTransformation>\n" +
-                "            <transformStatement>\n" +
-                "                <EOF/>\n" +
-                "            </transformStatement>\n" +
                 "        </transformStatement>\n" +
                 "    </transformStatement>\n" +
                 "</root>\n" ;
@@ -155,7 +152,7 @@ class ParseTreeToXmlTest {
 
         String xpathExp = ".//transformStatement/whereTransformation";
 
-        NodeList nodes = (NodeList) pstu.xpathQuery(q, xpathExp, false);
+        NodeList nodes = (NodeList) pstu.xpathQuery(q, xpathExp, true);
         // Check that 1 found
         assertEquals(1,nodes.getLength());
 

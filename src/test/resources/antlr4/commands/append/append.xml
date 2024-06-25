@@ -43,9 +43,10 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */ -->
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><root>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+    <value>|</value>
     <transformStatement>
-        <value>|</value>
         <appendTransformation>
             <value>append</value>
             <t_append_subsearchoptionsParameter>
@@ -83,16 +84,13 @@
             <subsearchStatement>
                 <value>[</value>
                 <value>|</value>
-                <subsearchTransformStatement>
+                <transformStatement>
                     <addinfoTransformation>
                         <value>addinfo</value>
                     </addinfoTransformation>
-                </subsearchTransformStatement>
+                </transformStatement>
                 <value>]</value>
             </subsearchStatement>
         </appendTransformation>
-        <transformStatement>
-            <value><EOF/></value>
-        </transformStatement>
     </transformStatement>
 </root>

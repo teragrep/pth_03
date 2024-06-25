@@ -46,9 +46,11 @@
 parser grammar DPLParserTransform_set;
 
 setTransformation
-        : COMMAND_MODE_SET (COMMAND_SET_MODE_UNION|COMMAND_SET_MODE_DIFF|COMMAND_SET_MODE_INTERSECT)  t_setsubsearchParameter t_setsubsearchParameter
-        ; //the subsearch is incorrect and need a replacement, old
+        : COMMAND_MODE_SET t_setOption_Parameter subsearchStatement
+        ;
 
-t_setsubsearchParameter
-        : BRACKET_L COMMAND_MODE_PIPE? subsearchTransformStatement BRACKET_R
+t_setOption_Parameter
+        : COMMAND_SET_MODE_UNION
+        | COMMAND_SET_MODE_DIFF
+        | COMMAND_SET_MODE_INTERSECT
         ;

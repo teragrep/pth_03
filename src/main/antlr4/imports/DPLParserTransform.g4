@@ -206,315 +206,161 @@ import DPLParserAggregations,
 // statements
 
 transformStatement
-        : PIPE abstractTransformation transformStatement?
-        | PIPE accumTransformation transformStatement?
-        | PIPE addcoltotalsTransformation transformStatement?
-        | PIPE addinfoTransformation transformStatement?
-        | PIPE addtotalsTransformation transformStatement?
-        | PIPE analyzefieldsTransformation transformStatement?
-        | PIPE anomaliesTransformation transformStatement?
-        | PIPE anomalousvalueTransformation transformStatement?
-        | PIPE anomalydetectionTransformation transformStatement?
-        | PIPE appendTransformation transformStatement?
-        | PIPE appendcolsTransformation transformStatement?
-        | PIPE appendpipeTransformation transformStatement?
-        | PIPE arulesTransformation transformStatement?
-        | PIPE associateTransformation transformStatement?
-        | PIPE auditTransformation transformStatement?
-        | PIPE autoregressTransformation transformStatement?
-        | PIPE binTransformation transformStatement?
-        | PIPE bucketdirTransformation transformStatement?
-        | PIPE chartTransformation transformStatement?
-        | PIPE clusterTransformation transformStatement?
-        | PIPE cofilterTransformation transformStatement?
-        | PIPE collapseTransformation transformStatement?
-        | PIPE collectTransformation transformStatement?
-        | PIPE concurrencyTransformation transformStatement?
-        | PIPE contingencyTransformation transformStatement?
-        | PIPE convertTransformation transformStatement?
-        | PIPE correlateTransformation transformStatement?
-        | PIPE datamodelTransformation transformStatement?
-        | PIPE dbinspectTransformation transformStatement?
-        | PIPE dedupTransformation transformStatement?
-        | PIPE deleteTransformation transformStatement?
-        | PIPE deltaTransformation transformStatement?
-        | PIPE diffTransformation transformStatement?
-	| PIPE dplTransformation transformStatement?
-        | PIPE dumpTransformation transformStatement?
-        | PIPE erexTransformation transformStatement?
-        | PIPE evalTransformation transformStatement?
-        | PIPE eventcountTransformation transformStatement?
-        | PIPE eventstatsTransformation transformStatement?
-	| PIPE explainTransformation transformStatement?
-        | PIPE extractTransformation transformStatement?
-        | PIPE fieldformatTransformation transformStatement?
-        | PIPE fieldsTransformation transformStatement?
-        | PIPE fieldsummaryTransformation transformStatement?
-        | PIPE filldownTransformation transformStatement?
-        | PIPE fillnullTransformation transformStatement?
-        | PIPE findkeywordsTransformation transformStatement?
-        | PIPE findtypesTransformation transformStatement?
-        | PIPE folderizeTransformation transformStatement?
-        | PIPE foreachTransformation transformStatement?
-        | PIPE formatTransformation transformStatement?
-        | PIPE fromTransformation transformStatement?
-        | PIPE gaugeTransformation transformStatement?
-        | PIPE gentimesTransformation transformStatement?
-        | PIPE geomTransformation transformStatement?
-        | PIPE geomfilterTransformation transformStatement?
-        | PIPE geostatsTransformation transformStatement?
-        | PIPE headTransformation transformStatement?
-        | PIPE highlightTransformation transformStatement?
-        | PIPE historyTransformation transformStatement?
-        | PIPE iconifyTransformation transformStatement?
-        | PIPE inputcsvTransformation transformStatement?
-        | PIPE inputlookupTransformation transformStatement?
-        | PIPE iplocationTransformation transformStatement?
-        | PIPE joinTransformation transformStatement?
-        | PIPE kmeansTransformation transformStatement?
-        | PIPE kvformTransformation transformStatement?
-        | PIPE loadjobTransformation transformStatement?
-        | PIPE localizeTransformation transformStatement?
-        | PIPE localopTransformation transformStatement?
-        | PIPE lookupTransformation transformStatement?
-        | PIPE makecontinuousTransformation transformStatement?
-        | PIPE makejsonTransformation transformStatement?
-        | PIPE makemvTransformation transformStatement?
-        | PIPE makeresultsTransformation transformStatement?
-        | PIPE mapTransformation transformStatement?
-        | PIPE mcatalogTransformation transformStatement?
-        | PIPE mcollectTransformation transformStatement?
-        | PIPE metadataTransformation transformStatement?
-        | PIPE metasearchTransformation transformStatement?
-        | PIPE meventcollectTransformation transformStatement?
-        | PIPE mstatsTransformation transformStatement?
-        | PIPE multikvTransformation transformStatement?
-        | PIPE multisearchTransformation transformStatement?
-        | PIPE mvcombineTransformation transformStatement?
-        | PIPE mvexpandTransformation transformStatement?
-        | PIPE nomvTransformation transformStatement?
-        | PIPE outlierTransformation transformStatement?
-        | PIPE outputcsvTransformation transformStatement?
-        | PIPE outputlookupTransformation transformStatement?
-        | PIPE outputtextTransformation transformStatement?
-        | PIPE overlapTransformation transformStatement?
-        | PIPE pivotTransformation transformStatement?
-        | PIPE predictTransformation transformStatement?
-        | PIPE rangemapTransformation transformStatement?
-        | PIPE rareTransformation transformStatement?
-        | PIPE redistributeTransformation transformStatement?
-        | PIPE regexTransformation transformStatement?
-        | PIPE relevancyTransformation transformStatement?
-        | PIPE reltimeTransformation transformStatement?
-        | PIPE renameTransformation transformStatement?
-        | PIPE replaceTransformation transformStatement?
-        | PIPE restTransformation transformStatement?
-        | PIPE returnTransformation transformStatement?
-        | PIPE reverseTransformation transformStatement?
-	| PIPE rex4jTransformation transformStatement?
-        | PIPE rexTransformation transformStatement?
-        | PIPE rtorderTransformation transformStatement?
-        | PIPE runshellscriptTransformation transformStatement?
-        | PIPE savedsearchTransformation transformStatement?
-        | PIPE scriptTransformation transformStatement?
-        | PIPE scrubTransformation transformStatement?
-        | PIPE searchTransformation transformStatement?
-        | PIPE searchtxnTransformation transformStatement?
-        | PIPE selfjoinTransformation transformStatement?
-        | PIPE sendalertTransformation transformStatement?
-        | PIPE sendemailTransformation transformStatement?
-        | PIPE setTransformation transformStatement?
-        | PIPE setfieldsTransformation transformStatement?
-        | PIPE sichartTransformation transformStatement?
-        | PIPE sirareTransformation transformStatement?
-        | PIPE sistatsTransformation transformStatement?
-        | PIPE sitimechartTransformation transformStatement?
-        | PIPE sitopTransformation transformStatement?
-        | PIPE sortTransformation transformStatement?
-        | PIPE spathTransformation transformStatement?
-        | PIPE statsTransformation transformStatement?
-        | PIPE strcatTransformation transformStatement?
-        | PIPE streamstatsTransformation transformStatement?
-        | PIPE tableTransformation transformStatement?
-        | PIPE tagsTransformation transformStatement?
-        | PIPE tailTransformation transformStatement?
-	| PIPE teragrepTransformation transformStatement?
-        | PIPE timechartTransformation transformStatement?
-        | PIPE timewrapTransformation transformStatement?
-        | PIPE topTransformation transformStatement?
-        | PIPE transactionTransformation transformStatement?
-        | PIPE transposeTransformation transformStatement?
-        | PIPE trendlineTransformation transformStatement?
-        | PIPE tscollectTransformation transformStatement?
-        | PIPE tstatsTransformation transformStatement?
-        | PIPE typeaheadTransformation transformStatement?
-        | PIPE typelearnerTransformation transformStatement?
-        | PIPE typerTransformation transformStatement?
-        | PIPE unionTransformation transformStatement?
-        | PIPE uniqTransformation transformStatement?
-        | PIPE untableTransformation transformStatement?
-        | PIPE whereTransformation transformStatement?
-        | PIPE x11Transformation transformStatement?
-        | PIPE xmlkvTransformation transformStatement?
-        | PIPE xmlunescapeTransformation transformStatement?
-        | PIPE xpathTransformation transformStatement?
-        | PIPE xyseriesTransformation transformStatement?
+	: abstractTransformation (PIPE transformStatement)?
+        | accumTransformation (PIPE transformStatement)?
+        | addcoltotalsTransformation (PIPE transformStatement)?
+        | addinfoTransformation (PIPE transformStatement)?
+        | addtotalsTransformation (PIPE transformStatement)?
+        | analyzefieldsTransformation (PIPE transformStatement)?
+        | anomaliesTransformation (PIPE transformStatement)?
+        | anomalousvalueTransformation (PIPE transformStatement)?
+        | anomalydetectionTransformation (PIPE transformStatement)?
+        | appendTransformation (PIPE transformStatement)?
+        | appendcolsTransformation (PIPE transformStatement)?
+        | appendpipeTransformation (PIPE transformStatement)?
+        | arulesTransformation (PIPE transformStatement)?
+        | associateTransformation (PIPE transformStatement)?
+        | auditTransformation (PIPE transformStatement)?
+        | autoregressTransformation (PIPE transformStatement)?
+        | binTransformation (PIPE transformStatement)?
+        | bucketdirTransformation (PIPE transformStatement)?
+        | chartTransformation (PIPE transformStatement)?
+        | clusterTransformation (PIPE transformStatement)?
+        | cofilterTransformation (PIPE transformStatement)?
+        | collapseTransformation (PIPE transformStatement)?
+        | collectTransformation (PIPE transformStatement)?
+        | concurrencyTransformation (PIPE transformStatement)?
+        | contingencyTransformation (PIPE transformStatement)?
+        | convertTransformation (PIPE transformStatement)?
+        | correlateTransformation (PIPE transformStatement)?
+        | datamodelTransformation (PIPE transformStatement)?
+        | dbinspectTransformation (PIPE transformStatement)?
+        | dedupTransformation (PIPE transformStatement)?
+        | deleteTransformation (PIPE transformStatement)?
+        | deltaTransformation (PIPE transformStatement)?
+        | diffTransformation (PIPE transformStatement)?
+	| dplTransformation (PIPE transformStatement)?
+        | dumpTransformation (PIPE transformStatement)?
+        | erexTransformation (PIPE transformStatement)?
+        | evalTransformation (PIPE transformStatement)?
+        | eventcountTransformation (PIPE transformStatement)?
+        | eventstatsTransformation (PIPE transformStatement)?
+	| explainTransformation (PIPE transformStatement)?
+        | extractTransformation (PIPE transformStatement)?
+        | fieldformatTransformation (PIPE transformStatement)?
+        | fieldsTransformation (PIPE transformStatement)?
+        | fieldsummaryTransformation (PIPE transformStatement)?
+        | filldownTransformation (PIPE transformStatement)?
+        | fillnullTransformation (PIPE transformStatement)?
+        | findkeywordsTransformation (PIPE transformStatement)?
+        | findtypesTransformation (PIPE transformStatement)?
+        | folderizeTransformation (PIPE transformStatement)?
+        | foreachTransformation (PIPE transformStatement)?
+        | formatTransformation (PIPE transformStatement)?
+        | fromTransformation (PIPE transformStatement)?
+        | gaugeTransformation (PIPE transformStatement)?
+        | gentimesTransformation (PIPE transformStatement)?
+        | geomTransformation (PIPE transformStatement)?
+        | geomfilterTransformation (PIPE transformStatement)?
+        | geostatsTransformation (PIPE transformStatement)?
+        | headTransformation (PIPE transformStatement)?
+        | highlightTransformation (PIPE transformStatement)?
+        | historyTransformation (PIPE transformStatement)?
+        | iconifyTransformation (PIPE transformStatement)?
+        | inputcsvTransformation (PIPE transformStatement)?
+        | inputlookupTransformation (PIPE transformStatement)?
+        | iplocationTransformation (PIPE transformStatement)?
+        | joinTransformation (PIPE transformStatement)?
+        | kmeansTransformation (PIPE transformStatement)?
+        | kvformTransformation (PIPE transformStatement)?
+        | loadjobTransformation (PIPE transformStatement)?
+        | localizeTransformation (PIPE transformStatement)?
+        | localopTransformation (PIPE transformStatement)?
+        | lookupTransformation (PIPE transformStatement)?
+        | makecontinuousTransformation (PIPE transformStatement)?
+        | makejsonTransformation (PIPE transformStatement)?
+        | makemvTransformation (PIPE transformStatement)?
+        | makeresultsTransformation (PIPE transformStatement)?
+        | mapTransformation (PIPE transformStatement)?
+        | mcatalogTransformation (PIPE transformStatement)?
+        | mcollectTransformation (PIPE transformStatement)?
+        | metadataTransformation (PIPE transformStatement)?
+        | metasearchTransformation (PIPE transformStatement)?
+        | meventcollectTransformation (PIPE transformStatement)?
+        | mstatsTransformation (PIPE transformStatement)?
+        | multikvTransformation (PIPE transformStatement)?
+        | multisearchTransformation (PIPE transformStatement)?
+        | mvcombineTransformation (PIPE transformStatement)?
+        | mvexpandTransformation (PIPE transformStatement)?
+        | nomvTransformation (PIPE transformStatement)?
+        | outlierTransformation (PIPE transformStatement)?
+        | outputcsvTransformation (PIPE transformStatement)?
+        | outputlookupTransformation (PIPE transformStatement)?
+        | outputtextTransformation (PIPE transformStatement)?
+        | overlapTransformation (PIPE transformStatement)?
+        | pivotTransformation (PIPE transformStatement)?
+        | predictTransformation (PIPE transformStatement)?
+        | rangemapTransformation (PIPE transformStatement)?
+        | rareTransformation (PIPE transformStatement)?
+        | redistributeTransformation (PIPE transformStatement)?
+        | regexTransformation (PIPE transformStatement)?
+        | relevancyTransformation (PIPE transformStatement)?
+        | reltimeTransformation (PIPE transformStatement)?
+        | renameTransformation (PIPE transformStatement)?
+        | replaceTransformation (PIPE transformStatement)?
+        | restTransformation (PIPE transformStatement)?
+        | returnTransformation (PIPE transformStatement)?
+        | reverseTransformation (PIPE transformStatement)?
+	| rex4jTransformation (PIPE transformStatement)?
+        | rexTransformation (PIPE transformStatement)?
+        | rtorderTransformation (PIPE transformStatement)?
+        | runshellscriptTransformation (PIPE transformStatement)?
+        | savedsearchTransformation (PIPE transformStatement)?
+        | scriptTransformation (PIPE transformStatement)?
+        | scrubTransformation (PIPE transformStatement)?
+        | searchTransformation (PIPE transformStatement)?
+        | searchtxnTransformation (PIPE transformStatement)?
+        | selfjoinTransformation (PIPE transformStatement)?
+        | sendalertTransformation (PIPE transformStatement)?
+        | sendemailTransformation (PIPE transformStatement)?
+        | setTransformation (PIPE transformStatement)?
+        | setfieldsTransformation (PIPE transformStatement)?
+        | sichartTransformation (PIPE transformStatement)?
+        | sirareTransformation (PIPE transformStatement)?
+        | sistatsTransformation (PIPE transformStatement)?
+        | sitimechartTransformation (PIPE transformStatement)?
+        | sitopTransformation (PIPE transformStatement)?
+        | sortTransformation (PIPE transformStatement)?
+        | spathTransformation (PIPE transformStatement)?
+        | statsTransformation (PIPE transformStatement)?
+        | strcatTransformation (PIPE transformStatement)?
+        | streamstatsTransformation (PIPE transformStatement)?
+        | tableTransformation (PIPE transformStatement)?
+        | tagsTransformation (PIPE transformStatement)?
+        | tailTransformation (PIPE transformStatement)?
+	| teragrepTransformation (PIPE transformStatement)?
+        | timechartTransformation (PIPE transformStatement)?
+        | timewrapTransformation (PIPE transformStatement)?
+        | topTransformation (PIPE transformStatement)?
+        | transactionTransformation (PIPE transformStatement)?
+        | transposeTransformation (PIPE transformStatement)?
+        | trendlineTransformation (PIPE transformStatement)?
+        | tscollectTransformation (PIPE transformStatement)?
+        | tstatsTransformation (PIPE transformStatement)?
+        | typeaheadTransformation (PIPE transformStatement)?
+        | typelearnerTransformation (PIPE transformStatement)?
+        | typerTransformation (PIPE transformStatement)?
+        | unionTransformation (PIPE transformStatement)?
+        | uniqTransformation (PIPE transformStatement)?
+        | untableTransformation (PIPE transformStatement)?
+        | whereTransformation (PIPE transformStatement)?
+        | x11Transformation (PIPE transformStatement)?
+        | xmlkvTransformation (PIPE transformStatement)?
+        | xmlunescapeTransformation (PIPE transformStatement)?
+        | xpathTransformation (PIPE transformStatement)?
+        | xyseriesTransformation (PIPE transformStatement)?
         | EOF
         ;
 
-subsearchTransformStatement
-        : abstractTransformation transformStatement?
-        | accumTransformation transformStatement?
-        | addcoltotalsTransformation transformStatement?
-        | addinfoTransformation transformStatement?
-        | addtotalsTransformation transformStatement?
-        | analyzefieldsTransformation transformStatement?
-        | anomaliesTransformation transformStatement?
-        | anomalousvalueTransformation transformStatement?
-        | anomalydetectionTransformation transformStatement?
-        | appendTransformation transformStatement?
-        | appendcolsTransformation transformStatement?
-        | appendpipeTransformation transformStatement?
-        | arulesTransformation transformStatement?
-        | associateTransformation transformStatement?
-        | auditTransformation transformStatement?
-        | autoregressTransformation transformStatement?
-        | binTransformation transformStatement?
-        | bucketdirTransformation transformStatement?
-        | chartTransformation transformStatement?
-        | clusterTransformation transformStatement?
-        | cofilterTransformation transformStatement?
-        | collapseTransformation transformStatement?
-        | collectTransformation transformStatement?
-        | concurrencyTransformation transformStatement?
-        | contingencyTransformation transformStatement?
-        | convertTransformation transformStatement?
-        | correlateTransformation transformStatement?
-        | datamodelTransformation transformStatement?
-        | dbinspectTransformation transformStatement?
-        | dedupTransformation transformStatement?
-        | deleteTransformation transformStatement?
-        | deltaTransformation transformStatement?
-        | diffTransformation transformStatement?
-	| dplTransformation transformStatement?
-        | dumpTransformation transformStatement?
-        | erexTransformation transformStatement?
-        | evalTransformation transformStatement?
-        | eventcountTransformation transformStatement?
-        | eventstatsTransformation transformStatement?
-	| explainTransformation transformStatement?
-        | extractTransformation transformStatement?
-        | fieldformatTransformation transformStatement?
-        | fieldsTransformation transformStatement?
-        | fieldsummaryTransformation transformStatement?
-        | filldownTransformation transformStatement?
-        | fillnullTransformation transformStatement?
-        | findkeywordsTransformation transformStatement?
-        | findtypesTransformation transformStatement?
-        | folderizeTransformation transformStatement?
-        | foreachTransformation transformStatement?
-        | formatTransformation transformStatement?
-        | fromTransformation transformStatement?
-        | gaugeTransformation transformStatement?
-        | gentimesTransformation transformStatement?
-        | geomTransformation transformStatement?
-        | geomfilterTransformation transformStatement?
-        | geostatsTransformation transformStatement?
-        | headTransformation transformStatement?
-        | highlightTransformation transformStatement?
-        | historyTransformation transformStatement?
-        | iconifyTransformation transformStatement?
-        | inputcsvTransformation transformStatement?
-        | inputlookupTransformation transformStatement?
-        | iplocationTransformation transformStatement?
-        | joinTransformation transformStatement?
-        | kmeansTransformation transformStatement?
-        | kvformTransformation transformStatement?
-        | loadjobTransformation transformStatement?
-        | localizeTransformation transformStatement?
-        | localopTransformation transformStatement?
-        | lookupTransformation transformStatement?
-        | makecontinuousTransformation transformStatement?
-        | makejsonTransformation transformStatement?
-        | makemvTransformation transformStatement?
-        | makeresultsTransformation transformStatement?
-        | mapTransformation transformStatement?
-        | mcatalogTransformation transformStatement?
-        | mcollectTransformation transformStatement?
-        | metadataTransformation transformStatement?
-        | metasearchTransformation transformStatement?
-        | meventcollectTransformation transformStatement?
-        | mstatsTransformation transformStatement?
-        | multikvTransformation transformStatement?
-        | multisearchTransformation transformStatement?
-        | mvcombineTransformation transformStatement?
-        | mvexpandTransformation transformStatement?
-        | nomvTransformation transformStatement?
-        | outlierTransformation transformStatement?
-        | outputcsvTransformation transformStatement?
-        | outputlookupTransformation transformStatement?
-        | outputtextTransformation transformStatement?
-        | overlapTransformation transformStatement?
-        | pivotTransformation transformStatement?
-        | predictTransformation transformStatement?
-        | rangemapTransformation transformStatement?
-        | rareTransformation transformStatement?
-        | redistributeTransformation transformStatement?
-        | regexTransformation transformStatement?
-        | relevancyTransformation transformStatement?
-        | reltimeTransformation transformStatement?
-        | renameTransformation transformStatement?
-        | replaceTransformation transformStatement?
-        | restTransformation transformStatement?
-        | returnTransformation transformStatement?
-        | reverseTransformation transformStatement?
-	| rex4jTransformation transformStatement?
-        | rexTransformation transformStatement?
-        | rtorderTransformation transformStatement?
-        | runshellscriptTransformation transformStatement?
-        | savedsearchTransformation transformStatement?
-        | scriptTransformation transformStatement?
-        | scrubTransformation transformStatement?
-        | searchTransformation transformStatement?
-        | searchtxnTransformation transformStatement?
-        | selfjoinTransformation transformStatement?
-        | sendalertTransformation transformStatement?
-        | sendemailTransformation transformStatement?
-        | setTransformation transformStatement?
-        | setfieldsTransformation transformStatement?
-        | sichartTransformation transformStatement?
-        | sirareTransformation transformStatement?
-        | sistatsTransformation transformStatement?
-        | sitimechartTransformation transformStatement?
-        | sitopTransformation transformStatement?
-        | sortTransformation transformStatement?
-        | spathTransformation transformStatement?
-        | statsTransformation transformStatement?
-        | strcatTransformation transformStatement?
-        | streamstatsTransformation transformStatement?
-        | tableTransformation transformStatement?
-        | tagsTransformation transformStatement?
-        | tailTransformation transformStatement?
-	| teragrepTransformation transformStatement?
-        | timechartTransformation transformStatement?
-        | timewrapTransformation transformStatement?
-        | topTransformation transformStatement?
-        | transactionTransformation transformStatement?
-        | transposeTransformation transformStatement?
-        | trendlineTransformation transformStatement?
-        | tscollectTransformation transformStatement?
-        | tstatsTransformation transformStatement?
-        | typeaheadTransformation transformStatement?
-        | typelearnerTransformation transformStatement?
-        | typerTransformation transformStatement?
-        | unionTransformation transformStatement?
-        | uniqTransformation transformStatement?
-        | untableTransformation transformStatement?
-        | whereTransformation transformStatement?
-        | x11Transformation transformStatement?
-        | xmlkvTransformation transformStatement?
-        | xmlunescapeTransformation transformStatement?
-        | xpathTransformation transformStatement?
-        | xyseriesTransformation transformStatement?
-        ;
+
 

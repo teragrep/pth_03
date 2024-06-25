@@ -45,53 +45,48 @@
  */ -->
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <root>
+    <value>|</value>
     <transformStatement>
-        <value>|</value>
         <multisearchTransformation>
             <value>multisearch</value>
             <subsearchStatement>
                 <value>[</value>
-                <subsearchTransformStatement>
+                <transformStatement>
                     <searchTransformation>
                         <value>search</value>
-                        <timeStatement>
-                            <logicalStatement>
-                                <searchQualifier>
-                                    <value>index</value>
-                                    <value>=</value>
+                        <searchTransformationRoot>
+                            <directoryStatement>
+                                <indexStatement>
+                                    <value>index=</value>
                                     <stringType>
                                         <value>a</value>
                                     </stringType>
-                                </searchQualifier>
-                            </logicalStatement>
-                        </timeStatement>
+                                </indexStatement>
+                            </directoryStatement>
+                        </searchTransformationRoot>
                     </searchTransformation>
-                </subsearchTransformStatement>
+                </transformStatement>
                 <value>]</value>
             </subsearchStatement>
             <subsearchStatement>
                 <value>[</value>
-                <subsearchTransformStatement>
+                <transformStatement>
                     <searchTransformation>
                         <value>search</value>
-                        <timeStatement>
-                            <logicalStatement>
-                                <searchQualifier>
-                                    <value>index</value>
-                                    <value>=</value>
+                        <searchTransformationRoot>
+                            <directoryStatement>
+                                <indexStatement>
+                                    <value>index=</value>
                                     <stringType>
                                         <value>b</value>
                                     </stringType>
-                                </searchQualifier>
-                            </logicalStatement>
-                        </timeStatement>
+                                </indexStatement>
+                            </directoryStatement>
+                        </searchTransformationRoot>
                     </searchTransformation>
-                </subsearchTransformStatement>
+                </transformStatement>
                 <value>]</value>
             </subsearchStatement>
         </multisearchTransformation>
-        <transformStatement>
-            <EOF/>
-        </transformStatement>
     </transformStatement>
 </root>

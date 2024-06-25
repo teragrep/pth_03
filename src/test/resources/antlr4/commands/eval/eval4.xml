@@ -45,8 +45,8 @@
  */ -->
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <root>
+    <value>|</value>
     <transformStatement>
-        <value>|</value>
         <evalTransformation>
             <value>eval</value>
             <t_eval_evalParameter>
@@ -74,6 +74,125 @@
                             <value>bas</value>
                         </evalFieldType>
                     </evalStatement>
+                </evalStatement>
+            </t_eval_evalParameter>
+            <value>,</value>
+            <t_eval_evalParameter>
+                <fieldType>
+                    <value>biz</value>
+                </fieldType>
+                <value>=</value>
+                <evalStatement>
+                    <value>NOT</value>
+                    <evalStatement>
+                        <evalStatement>
+                            <evalFieldType>
+                                <value>foo</value>
+                            </evalFieldType>
+                        </evalStatement>
+                        <value>=</value>
+                        <evalStatement>
+                            <evalNumberType>
+                                <value>1</value>
+                            </evalNumberType>
+                        </evalStatement>
+                    </evalStatement>
+                </evalStatement>
+            </t_eval_evalParameter>
+            <value>,</value>
+            <t_eval_evalParameter>
+                <fieldType>
+                    <value>giz</value>
+                </fieldType>
+                <value>=</value>
+                <evalStatement>
+                    <evalStatement>
+                        <evalFieldType>
+                            <value>biz</value>
+                        </evalFieldType>
+                    </evalStatement>
+                    <value>==</value>
+                    <evalStatement>
+                        <evalFieldType>
+                            <value>baz</value>
+                        </evalFieldType>
+                    </evalStatement>
+                </evalStatement>
+            </t_eval_evalParameter>
+            <value>,</value>
+            <t_eval_evalParameter>
+                <fieldType>
+                    <value>goz</value>
+                </fieldType>
+                <value>=</value>
+                <evalStatement>
+                    <evalStatement>
+                        <evalStatement>
+                            <value>NOT</value>
+                            <evalStatement>
+                                <evalStatement>
+                                    <evalFieldType>
+                                        <value>biz</value>
+                                    </evalFieldType>
+                                </evalStatement>
+                                <value>=</value>
+                                <evalStatement>
+                                    <evalNumberType>
+                                        <value>1</value>
+                                    </evalNumberType>
+                                </evalStatement>
+                            </evalStatement>
+                        </evalStatement>
+                        <value>AND</value>
+                        <evalStatement>
+                            <evalStatement>
+                                <evalFieldType>
+                                    <value>baz</value>
+                                </evalFieldType>
+                            </evalStatement>
+                            <value>=</value>
+                            <evalStatement>
+                                <evalFieldType>
+                                    <value>alakazam</value>
+                                </evalFieldType>
+                            </evalStatement>
+                        </evalStatement>
+                    </evalStatement>
+                    <value>AND</value>
+                    <evalStatement>
+                        <evalStatement>
+                            <evalFieldType>
+                                <value>bar</value>
+                            </evalFieldType>
+                        </evalStatement>
+                        <value>!=</value>
+                        <evalStatement>
+                            <evalStringType>
+                                <value>"foo"</value>
+                            </evalStringType>
+                        </evalStatement>
+                    </evalStatement>
+                </evalStatement>
+            </t_eval_evalParameter>
+            <value>,</value>
+            <t_eval_evalParameter>
+                <fieldType>
+                    <value>tiz</value>
+                </fieldType>
+                <value>=</value>
+                <evalStatement>
+                    <evalFunctionStatement>
+                        <evalMethodMax>
+                            <value>max</value>
+                            <value>(</value>
+                            <evalStatement>
+                                <evalFieldType>
+                                    <value>buz</value>
+                                </evalFieldType>
+                            </evalStatement>
+                            <value>)</value>
+                        </evalMethodMax>
+                    </evalFunctionStatement>
                 </evalStatement>
             </t_eval_evalParameter>
         </evalTransformation>

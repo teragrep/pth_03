@@ -57,7 +57,33 @@ t_execParameter
         | t_deleteModeParameter
         | t_loadModeParameter
         | t_kafkaSaveModeParameter
-        | t_bloomModeParameter)
+        | t_bloomModeParameter
+        | t_tokenizerParameter
+        | t_dynatraceParameter)
+        ;
+
+t_dynatraceParameter
+        : COMMAND_TERAGREP_MODE_DYNATRACE COMMAND_TERAGREP_MODE_METRIC COMMAND_TERAGREP_MODE_WRITE stringType?
+        ;
+
+t_tokenizerParameter
+        : COMMAND_TERAGREP_MODE_TOKENIZER t_formatParameter? t_inputParamater? t_outputParameter?
+        ;
+
+t_formatParameter
+        : COMMAND_TERAGREP_MODE_FORMAT stringType
+        ;
+
+t_inputParamater
+        : COMMAND_TERAGREP_MODE_INPUT fieldType
+        ;
+
+t_outputParameter
+        : COMMAND_TERAGREP_MODE_OUTPUT fieldType
+        ;
+
+t_estimatesParameter
+        : COMMAND_TERAGREP_MODE_ESTIMATES fieldType
         ;
 
 t_syslogModeParameter
@@ -77,11 +103,11 @@ t_parserExplainParameter
         ;
 
 t_loadModeParameter
-        : COMMAND_TERAGREP_MODE_HDFS COMMAND_TERAGREP_MODE_LOAD t_pathParameter?
+        : COMMAND_TERAGREP_MODE_HDFS COMMAND_TERAGREP_MODE_LOAD (t_pathParameter|t_hdfsFormatParameter|t_headerParameter|t_schemaParameter)*
         ;
 
 t_saveModeParameter
-        : COMMAND_TERAGREP_MODE_HDFS COMMAND_TERAGREP_MODE_SAVE t_pathParameter? t_retentionParameter? t_overwriteParameter?
+        : COMMAND_TERAGREP_MODE_HDFS COMMAND_TERAGREP_MODE_SAVE (t_pathParameter|t_retentionParameter|t_overwriteParameter|t_hdfsFormatParameter|t_headerParameter)*
         ;
 
 t_deleteModeParameter
@@ -93,11 +119,19 @@ t_listModeParameter
         ;
 
 t_getParameter
-        : (COMMAND_TERAGREP_MODE_GET | COMMAND_TERAGREP_MODE_SET) COMMAND_TERAGREP_MODE_SYSTEM COMMAND_TERAGREP_MODE_VERSION numberType?
+        : (COMMAND_TERAGREP_MODE_GET | COMMAND_TERAGREP_MODE_SET) (t_getTeragrepVersionParameter | t_getArchiveSummaryParameter) numberType?
+        ;
+
+t_getTeragrepVersionParameter
+        : COMMAND_TERAGREP_MODE_SYSTEM COMMAND_TERAGREP_MODE_VERSION
+        ;
+
+t_getArchiveSummaryParameter
+        : COMMAND_TERAGREP_MODE_ARCHIVE COMMAND_TERAGREP_MODE_SUMMARY searchTransformationRoot
         ;
 
 t_bloomOptionParameter
-        : COMMAND_TERAGREP_MODE_UPDATE | COMMAND_TERAGREP_MODE_CREATE
+        : COMMAND_TERAGREP_MODE_UPDATE t_estimatesParameter? t_inputParamater? | COMMAND_TERAGREP_MODE_CREATE t_estimatesParameter? t_inputParamater? | COMMAND_TERAGREP_MODE_ESTIMATE t_inputParamater? t_outputParameter?
         ;
 
 t_hostParameter
@@ -119,6 +153,22 @@ t_pathParameter
 t_topicParameter
         : stringType
         ;
+
+t_hdfsFormatParameter
+        : COMMAND_TERAGREP_MODE_HDFS_FORMAT
+            (COMMAND_TERAGREP_MODE_CSV_FORMAT|
+            COMMAND_TERAGREP_MODE_JSON_FORMAT|
+            COMMAND_TERAGREP_MODE_DEFAULT_FORMAT)
+        ;
+
+t_headerParameter
+        : COMMAND_TERAGREP_MODE_HEADER booleanType
+        ;
+
+t_schemaParameter
+        : COMMAND_TERAGREP_MODE_SCHEMA stringType
+        ;
+
 t_retentionParameter
         : COMMAND_TERAGREP_MODE_RETENTION spanType
         ;

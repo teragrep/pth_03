@@ -46,7 +46,7 @@
 parser grammar DPLParserTransform_eval;
 
 evalTransformation
-        : COMMAND_MODE_EVAL t_eval_evalParameter (COMMA? t_eval_evalParameter)*
+        : COMMAND_MODE_EVAL t_eval_evalParameter (COMMAND_EVAL_SUBMODE_BASE_COMMA t_eval_evalParameter)*
         ;
 
 

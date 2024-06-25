@@ -143,7 +143,7 @@ public class AppendSyntaxTests {
     void xpathTest6(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/append/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/appendTransformation/subsearchStatement/subsearchTransformStatement/addinfoTransformation/value";
+        String xpathExp = "/root/transformStatement/appendTransformation/subsearchStatement/transformStatement";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found

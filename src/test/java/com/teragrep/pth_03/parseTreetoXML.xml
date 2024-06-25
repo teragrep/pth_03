@@ -67,8 +67,8 @@
             </logicalStatement>
         </directoryStatement>
     </searchTransformationRoot>
+    <value>|</value>
     <transformStatement>
-        <value>|</value>
         <chartTransformation>
             <value>chart</value>
             <t_chart_aggregationInstruction>
@@ -97,8 +97,8 @@
                 </t_row_Parameter>
             </t_chart_by_column_rowOptions>
         </chartTransformation>
+        <value>|</value>
         <transformStatement>
-            <value>|</value>
             <whereTransformation>
                 <value>where</value>
                 <evalStatement>
@@ -115,9 +115,6 @@
                     </evalStatement>
                 </evalStatement>
             </whereTransformation>
-            <transformStatement>
-                <EOF/>
-            </transformStatement>
         </transformStatement>
     </transformStatement>
 </root>

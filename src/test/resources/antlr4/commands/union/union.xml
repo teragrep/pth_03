@@ -45,8 +45,8 @@
  */ -->
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <root>
+    <value>|</value>
     <transformStatement>
-        <value>|</value>
         <unionTransformation>
             <value>union</value>
             <t_union_datasetParameter>
@@ -64,7 +64,7 @@
                 <t_union_unnamedDatasetParameter>
                     <subsearchStatement>
                         <value>[</value>
-                        <subsearchTransformStatement>
+                        <transformStatement>
                             <searchTransformation>
                                 <value>search</value>
                                 <searchTransformationRoot>
@@ -78,7 +78,7 @@
                                     </directoryStatement>
                                 </searchTransformationRoot>
                             </searchTransformation>
-                        </subsearchTransformStatement>
+                        </transformStatement>
                         <value>]</value>
                     </subsearchStatement>
                 </t_union_unnamedDatasetParameter>
@@ -87,7 +87,7 @@
                 <t_union_unnamedDatasetParameter>
                     <subsearchStatement>
                         <value>[</value>
-                        <subsearchTransformStatement>
+                        <transformStatement>
                             <searchTransformation>
                                 <value>search</value>
                                 <searchTransformationRoot>
@@ -101,15 +101,11 @@
                                     </directoryStatement>
                                 </searchTransformationRoot>
                             </searchTransformation>
-                        </subsearchTransformStatement>
+                        </transformStatement>
                         <value>]</value>
                     </subsearchStatement>
                 </t_union_unnamedDatasetParameter>
             </t_union_datasetParameter>
         </unionTransformation>
-        <transformStatement>
-            <EOF/>
-        </transformStatement>
     </transformStatement>
 </root>
-

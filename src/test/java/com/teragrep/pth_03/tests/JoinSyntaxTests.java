@@ -163,7 +163,7 @@ public class JoinSyntaxTests {
     void xpathTest8(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/join/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/joinTransformation/t_join_unnamedDatasetParameter/subsearchStatement/subsearchTransformStatement/addinfoTransformation/value";
+        String xpathExp = "/root/transformStatement/joinTransformation/t_join_unnamedDatasetParameter/subsearchStatement/transformStatement";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found

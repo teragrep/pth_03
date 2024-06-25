@@ -46,7 +46,7 @@
 parser grammar DPLParserTransform_append;
 
 appendTransformation
-        : COMMAND_MODE_APPEND (t_append_subsearchoptionsParameter)* subsearchStatement*
+        : COMMAND_MODE_APPEND (t_append_subsearchoptionsParameter)* subsearchStatement
         ;
 
 

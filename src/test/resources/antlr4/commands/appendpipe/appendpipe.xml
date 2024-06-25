@@ -43,9 +43,10 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */ -->
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><root>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+    <value>|</value>
     <transformStatement>
-        <value>|</value>
         <appendpipeTransformation>
             <value>appendpipe</value>
             <t_appendpipe_run_in_previewParameter>
@@ -57,7 +58,7 @@
             <subsearchStatement>
                 <value>[</value>
                 <value>|</value>
-                <subsearchTransformStatement>
+                <transformStatement>
                     <addtotalsTransformation>
                         <value>addtotals</value>
                         <t_addtotals_labelParameter>
@@ -72,12 +73,9 @@
                             </fieldType>
                         </fieldListType>
                     </addtotalsTransformation>
-                </subsearchTransformStatement>
+                </transformStatement>
                 <value>]</value>
             </subsearchStatement>
         </appendpipeTransformation>
-        <transformStatement>
-            <value><EOF/></value>
-        </transformStatement>
     </transformStatement>
 </root>

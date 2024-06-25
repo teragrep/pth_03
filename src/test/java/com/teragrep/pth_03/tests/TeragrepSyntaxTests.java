@@ -61,7 +61,16 @@ public class TeragrepSyntaxTests {
             "teragrep3",
             "teragrep4",
             "teragrep5",
-            "teragrep6"
+            "teragrep6",
+            "teragrep7",
+            "teragrep8",
+            "teragrep9",
+            "teragrep10",
+            "teragrep11",
+            "teragrep12",
+            "teragrep_csv_schema",
+            "teragrep_csv_header",
+            "teragrep_archive_summary"
     })
     public void teragrepSyntaxParseTest(String arg) throws Exception {
         String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
@@ -91,7 +100,7 @@ public class TeragrepSyntaxTests {
     void xpathTest2(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/teragrepTransformation/t_getParameter/value[3]";
+        String xpathExp = "/root/transformStatement/teragrepTransformation/t_getParameter/t_getTeragrepVersionParameter";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
@@ -106,6 +115,145 @@ public class TeragrepSyntaxTests {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
         String xpathExp = "/root/transformStatement/teragrepTransformation/t_execParameter/t_kafkaSaveModeParameter/value[1]";
+
+        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        // Check that 1 found
+        assertEquals(1,nodesA.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep_tokenizer",
+    })
+    void xpathTestTokenizer(String arg) throws Exception {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String xpathExp = "/root/transformStatement/teragrepTransformation/t_execParameter/t_tokenizerParameter";
+
+        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        // Check that 1 found
+        assertEquals(1,nodesA.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep7",
+    })
+    void xpathTestDynatrace(String arg) throws Exception {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String xpathExp = "/root/transformStatement/teragrepTransformation/t_execParameter/t_dynatraceParameter";
+
+        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        // Check that 1 found
+        assertEquals(1,nodesA.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep8",
+    })
+    void xpathTestDynatraceWithOptionalParam(String arg) throws Exception {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String xpathExp = "/root/transformStatement/teragrepTransformation/t_execParameter/t_dynatraceParameter/stringType";
+
+        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        // Check that 1 found
+        assertEquals(1,nodesA.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep9",
+    })
+    void xpathTestCsvSave(String arg) throws Exception {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String xpathExp = "/root/transformStatement/teragrepTransformation/t_execParameter/t_saveModeParameter/t_hdfsFormatParameter";
+
+        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        // Check that 1 found
+        assertEquals(1,nodesA.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep10",
+    })
+    void xpathTestJsonSave(String arg) throws Exception {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String xpathExp = "/root/transformStatement/teragrepTransformation/t_execParameter/t_saveModeParameter/t_hdfsFormatParameter";
+
+        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        // Check that 1 found
+        assertEquals(1,nodesA.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep11",
+    })
+    void xpathTestDefaultSave(String arg) throws Exception {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String xpathExp = "/root/transformStatement/teragrepTransformation/t_execParameter/t_saveModeParameter/t_hdfsFormatParameter";
+
+        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        // Check that 1 found
+        assertEquals(1,nodesA.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep12",
+    })
+    void xpathTestCsvLoad(String arg) throws Exception {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String xpathExp = "/root/transformStatement/teragrepTransformation/t_execParameter/t_loadModeParameter/t_hdfsFormatParameter";
+
+        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        // Check that 1 found
+        assertEquals(1,nodesA.getLength());
+    }
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep_csv_header",
+    })
+    void xpathTestCsvLoadHeader(String arg) throws Exception {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String xpathExp = "/root/transformStatement/teragrepTransformation/t_execParameter/t_loadModeParameter/t_headerParameter/booleanType";
+
+        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        // Check that 1 found
+        assertEquals(1,nodesA.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep_csv_schema",
+    })
+    void xpathTestCsvLoadSchema(String arg) throws Exception {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String xpathExp = "/root/transformStatement/teragrepTransformation/t_execParameter/t_loadModeParameter/t_schemaParameter/stringType";
+
+        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        // Check that 1 found
+        assertEquals(1,nodesA.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep_archive_summary",
+    })
+    void xpathTestArchiveSummary(String arg) throws Exception {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String xpathExp = "/root/transformStatement/teragrepTransformation/t_getParameter/t_getArchiveSummaryParameter/searchTransformationRoot/directoryStatement/directoryStatement/indexStatement/stringType";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
