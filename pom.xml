@@ -19,6 +19,7 @@
     <changelist>-SNAPSHOT</changelist>
     <sha1/>
     <junit.jupiter.version>5.7.1</junit.jupiter.version>
+    <antlr4.version>4.9.3</antlr4.version>
   </properties>
   <scm>
     <connection>scm:git:https://github.com/teragrep/pth_03.git</connection>
@@ -50,7 +51,14 @@
     <dependency>
       <groupId>org.antlr</groupId>
       <artifactId>antlr4</artifactId>
-      <version>4.8</version>
+      <version>${antlr4.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.antlr</groupId>
+          <artifactId>antlr-runtime</artifactId>
+        </exclusion>
+      </exclusions>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -139,6 +147,8 @@
             <!-- readme -->
             <exclude>README.adoc</exclude>
             <exclude>README.md</exclude>
+            <!-- other maven files -->
+            <exclude>.flattened-pom.xml</exclude>
           </excludes>
         </configuration>
       </plugin>
@@ -185,6 +195,52 @@
           <useUnlimitedThreads>true</useUnlimitedThreads>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.4</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <relocations>
+                <relocation>
+                  <pattern>org.antlr</pattern>
+                  <shadedPattern>com.teragrep.pth_03.shaded.org.antlr</shadedPattern>
+                </relocation>
+              </relocations>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <version>1.1.0</version>
+        <configuration>
+          <updatePomFile>true</updatePomFile>
+          <flattenMode>bom</flattenMode>
+        </configuration>
+        <executions>
+          <execution>
+            <id>flatten</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>flatten.clean</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
   <reporting>
@@ -200,7 +256,7 @@
         <version>2.9</version>
       </plugin>
     </plugins>
-  </reporting>   
+  </reporting>
   <profiles>
     <profile>
       <id>publish-maven-central</id>
