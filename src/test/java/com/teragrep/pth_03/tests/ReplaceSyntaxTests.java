@@ -48,6 +48,7 @@ package com.teragrep.pth_03.tests;
 import com.teragrep.pth_03.ParserStructureTestingUtility;
 import com.teragrep.pth_03.ParserSyntaxTestingUtility;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.params.ParameterizedTest;
@@ -70,12 +71,12 @@ public class ReplaceSyntaxTests {
     @ValueSource(strings = {
             "replace",
     })
-    void xpathTest1(String arg) throws Exception {
+    void xpathTest1(String arg) {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/replace/" + arg + ".txt";
         String xpathExp = "/root/transformStatement/replaceTransformation";
 
-        NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        NodeList nodesA = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false));
         // Check that 1 found
         assertEquals(1,nodesA.getLength());
     }
@@ -83,13 +84,13 @@ public class ReplaceSyntaxTests {
     @ValueSource(strings = {
             "replace",
     })
-    void xpathTest2(String arg) throws Exception {
+    void xpathTest2(String arg) {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/replace/" + arg + ".txt";
 
         String xpathExp = "/root/transformStatement/replaceTransformation/t_replace_withInstruction/fieldType[1]/value";
 
-        NodeList nodes = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        NodeList nodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false));
         // Check that 1 found
         assertEquals(1,nodes.getLength());
 
@@ -98,13 +99,13 @@ public class ReplaceSyntaxTests {
     @ValueSource(strings = {
             "replace",
     })
-    void xpathTest3(String arg) throws Exception {
+    void xpathTest3(String arg) {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/replace/" + arg + ".txt";
 
         String xpathExp = "/root/transformStatement/replaceTransformation/t_replace_withInstruction/fieldType[2]/value";
 
-        NodeList nodes = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        NodeList nodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false));
         // Check that 1 found
         assertEquals(1,nodes.getLength());
 
@@ -113,13 +114,13 @@ public class ReplaceSyntaxTests {
     @ValueSource(strings = {
             "replace",
     })
-    void xpathTest4(String arg) throws Exception {
+    void xpathTest4(String arg) {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/replace/" + arg + ".txt";
 
         String xpathExp = "/root/transformStatement/replaceTransformation/fieldListType/fieldType/value";
 
-        NodeList nodes = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
+        NodeList nodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false));
         // Check that 1 found
         assertEquals(1,nodes.getLength());
 
@@ -129,7 +130,7 @@ public class ReplaceSyntaxTests {
     @ValueSource(strings = {
             "replace2",
     })
-    void multipleWiths_xpathTest(String arg) throws Exception {
+    void multipleWiths_xpathTest(String arg) {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/replace/" + arg + ".txt";
 
@@ -142,29 +143,28 @@ public class ReplaceSyntaxTests {
         String fieldListField1 = "/root/transformStatement/replaceTransformation/fieldListType/fieldType[1]/value";
         String fieldListField2 = "/root/transformStatement/replaceTransformation/fieldListType/fieldType[2]/value";
 
-        NodeList nodes1 = (NodeList) pstu.xpathQueryFile(fileName, withField1, false);
+        NodeList nodes1 = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, withField1, false));
         // Check that 1 found
         assertEquals(1,nodes1.getLength());
 
-        NodeList nodes2 = (NodeList) pstu.xpathQueryFile(fileName, withField2, false);
+        NodeList nodes2 = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, withField2, false));
         // Check that 1 found
         assertEquals(1,nodes2.getLength());
 
-        NodeList nodes3 = (NodeList) pstu.xpathQueryFile(fileName, withField3, false);
+        NodeList nodes3 = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, withField3, false));
         // Check that 1 found
         assertEquals(1,nodes3.getLength());
 
-        NodeList nodes4 = (NodeList) pstu.xpathQueryFile(fileName, withField4, false);
+        NodeList nodes4 = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, withField4, false));
         // Check that 1 found
         assertEquals(1,nodes4.getLength());
 
-        NodeList nodes5 = (NodeList) pstu.xpathQueryFile(fileName, fieldListField1, false);
+        NodeList nodes5 = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, fieldListField1, false));
         // Check that 1 found
         assertEquals(1,nodes5.getLength());
 
-        NodeList nodes6 = (NodeList) pstu.xpathQueryFile(fileName, fieldListField2, false);
+        NodeList nodes6 = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, fieldListField2, false));
         // Check that 1 found
         assertEquals(1,nodes6.getLength());
-
     }
 }
