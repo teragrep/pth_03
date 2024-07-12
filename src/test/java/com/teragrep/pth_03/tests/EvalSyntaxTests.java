@@ -73,6 +73,7 @@ public class EvalSyntaxTests {
             "eval_log_no_base",
             "eval_substr",
             "eval_substr_no_endindex",
+            "eval_sum",
             "eval_multiple_statements",
             "eval_multiple_statements_with_functions",
             "eval_validate"
@@ -430,5 +431,35 @@ public class EvalSyntaxTests {
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
         assertEquals(1, nodesA.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "eval_sum"
+    })
+    void sumTest(String arg) throws Exception {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/eval/" + arg + ".txt";
+
+        String sumMethod = "/root/transformStatement/evalTransformation/t_eval_evalParameter/evalStatement/evalFunctionStatement/evalMethodSum";
+        String parameters = "/root/transformStatement/evalTransformation/t_eval_evalParameter/evalStatement/evalFunctionStatement/evalMethodSum/evalStatement";
+        String fieldParam = "/root/transformStatement/evalTransformation/t_eval_evalParameter/evalStatement/evalFunctionStatement/evalMethodSum/evalStatement[1]/evalFieldType";
+        String numberParam1 = "/root/transformStatement/evalTransformation/t_eval_evalParameter/evalStatement/evalFunctionStatement/evalMethodSum/evalStatement[2]/evalNumberType";
+        String numberParam2 = "/root/transformStatement/evalTransformation/t_eval_evalParameter/evalStatement/evalFunctionStatement/evalMethodSum/evalStatement[2]/evalNumberType";
+
+        NodeList sumNode = (NodeList) pstu.xpathQueryFile(fileName, sumMethod, false);
+        assertEquals(1, sumNode.getLength());
+
+        NodeList evalStmts = (NodeList) pstu.xpathQueryFile(fileName, parameters, false);
+        assertEquals(3, evalStmts.getLength());
+
+        NodeList fieldNode = (NodeList) pstu.xpathQueryFile(fileName, fieldParam, false);
+        assertEquals(1, fieldNode.getLength());
+
+        NodeList numberNode1 = (NodeList) pstu.xpathQueryFile(fileName, numberParam1, false);
+        assertEquals(1, numberNode1.getLength());
+
+        NodeList numberNode2 = (NodeList) pstu.xpathQueryFile(fileName, numberParam2, false);
+        assertEquals(1, numberNode2.getLength());
     }
 }
