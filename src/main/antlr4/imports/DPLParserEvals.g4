@@ -117,6 +117,7 @@ evalFunctionStatement
         | evalMethodAtan // NumericFunction
         | evalMethodAtan2 // NumericFunction
         | evalMethodAtanh // NumericFunction
+        | evalMethodAvg // NumericFunction
         | evalMethodCeiling // NumericFunction
         | evalMethodCos // NumericFunction
         | evalMethodCosh // NumericFunction
@@ -210,6 +211,10 @@ evalMethodAtan2
 
 evalMethodAtanh
         : EVAL_LANGUAGE_MODE_ATANH EVAL_LANGUAGE_MODE_PARENTHESIS_L evalStatement EVAL_LANGUAGE_MODE_PARENTHESIS_R
+        ;
+
+evalMethodAvg
+        : EVAL_LANGUAGE_MODE_AVG EVAL_LANGUAGE_MODE_PARENTHESIS_L evalStatement (EVAL_LANGUAGE_MODE_COMMA evalStatement)+ EVAL_LANGUAGE_MODE_PARENTHESIS_R
         ;
 
 evalMethodCase

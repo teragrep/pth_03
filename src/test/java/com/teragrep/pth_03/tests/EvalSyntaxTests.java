@@ -50,6 +50,7 @@ import com.teragrep.pth_03.ParserSyntaxTestingUtility;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
@@ -75,7 +76,8 @@ public class EvalSyntaxTests {
             "eval_substr_no_endindex",
             "eval_multiple_statements",
             "eval_multiple_statements_with_functions",
-            "eval_validate"
+            "eval_validate",
+            "eval_avg"
     })
     public void evalSyntaxParseTest(String arg) throws Exception {
         String fileName = "src/test/resources/antlr4/commands/eval/" + arg + ".txt";
@@ -430,5 +432,35 @@ public class EvalSyntaxTests {
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
         assertEquals(1, nodesA.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "eval_avg"
+    })
+    void avgTest(String arg) {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/eval/" + arg + ".txt";
+
+        String avgMethod = "/root/transformStatement/evalTransformation/t_eval_evalParameter/evalStatement/evalFunctionStatement/evalMethodAvg";
+        String parameters = "/root/transformStatement/evalTransformation/t_eval_evalParameter/evalStatement/evalFunctionStatement/evalMethodAvg/evalStatement";
+        String fieldParam = "/root/transformStatement/evalTransformation/t_eval_evalParameter/evalStatement/evalFunctionStatement/evalMethodAvg/evalStatement[1]/evalFieldType";
+        String numberParam = "/root/transformStatement/evalTransformation/t_eval_evalParameter/evalStatement/evalFunctionStatement/evalMethodAvg/evalStatement[2]/evalNumberType";
+        String stringParam = "/root/transformStatement/evalTransformation/t_eval_evalParameter/evalStatement/evalFunctionStatement/evalMethodAvg/evalStatement[3]/evalStringType";
+
+        NodeList avgNode = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, avgMethod, false));
+        assertEquals(1, avgNode.getLength());
+
+        NodeList evalStmts = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, parameters, false));
+        assertEquals(3, evalStmts.getLength());
+
+        NodeList fieldNode = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, fieldParam, false));
+        assertEquals(1, fieldNode.getLength());
+
+        NodeList numberNode = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, numberParam, false));
+        assertEquals(1, numberNode.getLength());
+
+        NodeList stringNode = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, stringParam, false));
+        assertEquals(1, stringNode.getLength());
     }
 }
