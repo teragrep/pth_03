@@ -136,6 +136,7 @@ evalFunctionStatement
         | evalMethodSinh // NumericFunction
         | evalMethodSigfig // NumericFunction
         | evalMethodSqrt // NumericFunction
+        | evalMethodSum // NumericFunction
         | evalMethodTan // NumericFunction
         | evalMethodTanh // NumericFunction
         | evalMethodTonumber // NumericFunction
@@ -463,6 +464,10 @@ evalMethodSplit
 
 evalMethodSqrt
         : EVAL_LANGUAGE_MODE_SQRT EVAL_LANGUAGE_MODE_PARENTHESIS_L evalStatement EVAL_LANGUAGE_MODE_PARENTHESIS_R
+        ;
+
+evalMethodSum
+        : EVAL_LANGUAGE_MODE_SUM EVAL_LANGUAGE_MODE_PARENTHESIS_L evalStatement (EVAL_LANGUAGE_MODE_COMMA evalStatement)+ EVAL_LANGUAGE_MODE_PARENTHESIS_R
         ;
 
 evalMethodStrftime

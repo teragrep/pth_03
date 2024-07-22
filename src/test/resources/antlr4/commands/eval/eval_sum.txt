@@ -1,4 +1,4 @@
-/*
+<!-- /*
  * Teragrep Data Processing Language Parser Library PTH-03
  * Copyright (C) 2019, 2020, 2021, 2022  Suomen Kanuuna Oy
  *
@@ -42,13 +42,5 @@
  * To the extent this program is licensed as part of the Commercial versions of
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
- */
-parser grammar DPLParserTransform_replace;
-
-replaceTransformation
-        : COMMAND_MODE_REPLACE t_replace_withInstruction (COMMA t_replace_withInstruction)* ((COMMAND_REPLACE_MODE_IN|IN) fieldListType)?
-        ;
-
-t_replace_withInstruction
-        : fieldType COMMAND_REPLACE_MODE_WITH fieldType
-        ;
+ */ -->
+| eval a = sum(offset, 1, 3)

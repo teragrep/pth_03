@@ -16,3 +16,5 @@ src/main/antlr4/.vscode/launch.json
 /pth_03.iml
 /.project
 /.classpath
+/.flattened-pom.xml
+/dependency-reduced-pom.xml
