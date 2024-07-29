@@ -1,4 +1,4 @@
-/*
+<!-- /*
  * Teragrep Data Processing Language Parser Library PTH-03
  * Copyright (C) 2019, 2020, 2021, 2022  Suomen Kanuuna Oy
  *
@@ -42,29 +42,5 @@
  * To the extent this program is licensed as part of the Commercial versions of
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
- */
-parser grammar DPLParserTransform_head;
-        //syntax = <stats-agg> (as <wc-field>)? not sure if done correctly. Also, should binSpans-s be in one bracket?
-headTransformation
-        : COMMAND_MODE_HEAD (t_head_nullParameter | t_head_keepLastParameter)*? t_head_integerType (t_head_nullParameter | t_head_keepLastParameter)*?
-        | COMMAND_MODE_HEAD (t_head_limitParameter | t_head_nullParameter | t_head_keepLastParameter)*? t_head_evalParameter (t_head_limitParameter | t_head_nullParameter | t_head_keepLastParameter)*?
-        ;
-
-t_head_keepLastParameter
-        : COMMAND_HEAD_MODE_KEEPLAST booleanType
-        ;
-
-t_head_limitParameter
-        : COMMAND_HEAD_MODE_LIMIT integerType
-        ;
-
-t_head_nullParameter
-        : COMMAND_HEAD_MODE_NULL booleanType
-        ;
-t_head_evalParameter
-        : COMMAND_HEAD_MODE_PARENTHESIS_L evalStatement EVAL_LANGUAGE_MODE_PARENTHESIS_R
-        ;
-
-t_head_integerType
-        : COMMAND_HEAD_MODE_INTEGER
-        ;
+ */ -->
+| head limit=5 ( someeval > 5) keeplast=false null=true
