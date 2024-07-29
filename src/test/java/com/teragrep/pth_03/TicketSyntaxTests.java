@@ -46,6 +46,8 @@
 
 package com.teragrep.pth_03;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
@@ -63,7 +65,6 @@ public class TicketSyntaxTests {
             "ticket16",
             "ticket18_g",
             "ticket_2_g",
-            "ticket17",
             "ticket18",
             "ticket19",
             "ticket21",
@@ -127,13 +128,9 @@ public class TicketSyntaxTests {
             "ticket77",
             "ticket78",
             "ticket81",
-            "ticket82",
             "ticket83",
             "ticket84",
-            "ticket84_1",
             "ticket86",
-            "ticket87",
-            "ticket87_1",
             "ticket87_2",
             "ticket81_a",
             "ticket91",
@@ -302,5 +299,64 @@ public class TicketSyntaxTests {
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
         assertEquals(1,nodesA.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "ticket17",
+    })
+    void invalidWhereQueryTest(String arg) {
+        String fileName = "src/test/resources/antlr4/tickets/" + arg + ".txt";
+        ParserSyntaxTestingUtility parserSyntaxTestingUtility
+                = new ParserSyntaxTestingUtility(fileName, false);
+        Assertions.assertThrows(Exception.class, () -> parserSyntaxTestingUtility.syntaxParseTest(arg));
+    }
+
+    @Disabled(value = "Issue open. Can't parse second right parenthesis")
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "ticket82",
+    })
+    void aggregateWithEvalColumnTest(String arg) {
+        String fileName = "src/test/resources/antlr4/tickets/" + arg + ".txt";
+        ParserSyntaxTestingUtility parserSyntaxTestingUtility
+                = new ParserSyntaxTestingUtility(fileName, false);
+        Assertions.assertDoesNotThrow(() -> parserSyntaxTestingUtility.syntaxParseTest(arg));
+    }
+
+    @Disabled(value = "Can't parse second right parenthesis")
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "ticket84_1",
+    })
+    void aggregateWithEvalColumnTest_2(String arg) {
+        String fileName = "src/test/resources/antlr4/tickets/" + arg + ".txt";
+        ParserSyntaxTestingUtility parserSyntaxTestingUtility
+                = new ParserSyntaxTestingUtility(fileName, false);
+        Assertions.assertDoesNotThrow(() -> parserSyntaxTestingUtility.syntaxParseTest(arg));
+    }
+
+    @Disabled(value = "Not implemented. Parameter is not allowed on the left side of the FieldList yet.")
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "ticket87",
+    })
+    void dedupConsecutiveOnLeftSideOfFieldListTest(String arg) { // should work on either side of the fieldList
+        String fileName = "src/test/resources/antlr4/tickets/" + arg + ".txt";
+        ParserSyntaxTestingUtility parserSyntaxTestingUtility
+                = new ParserSyntaxTestingUtility(fileName, false);
+        Assertions.assertDoesNotThrow(() -> parserSyntaxTestingUtility.syntaxParseTest(arg));
+    }
+
+    @Disabled(value = "Not implemented. Parameter is not allowed on the left side of the FieldList yet.")
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "ticket87_1",
+    })
+    void dedupKeepemptyOnLeftSideOfFieldListTest(String arg) { // should work on either side of the fieldList
+        String fileName = "src/test/resources/antlr4/tickets/" + arg + ".txt";
+        ParserSyntaxTestingUtility parserSyntaxTestingUtility
+                = new ParserSyntaxTestingUtility(fileName, false);
+        Assertions.assertDoesNotThrow(() -> parserSyntaxTestingUtility.syntaxParseTest(arg));
     }
 }

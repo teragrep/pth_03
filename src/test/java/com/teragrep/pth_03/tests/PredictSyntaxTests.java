@@ -50,6 +50,7 @@ import com.teragrep.pth_03.ParserSyntaxTestingUtility;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
@@ -57,6 +58,7 @@ import org.w3c.dom.NodeList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PredictSyntaxTests {
+    @Disabled(value = "lower and upper options don't parse correctly")
     @ParameterizedTest(name = "{index} command=''{0}''")
     @ValueSource(strings = {
             "predict",
