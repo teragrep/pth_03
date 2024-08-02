@@ -312,7 +312,7 @@ public class TicketSyntaxTests {
         Assertions.assertThrows(Exception.class, () -> parserSyntaxTestingUtility.syntaxParseTest(arg));
     }
 
-    @Disabled(value = "Issue open. Can't parse second right parenthesis")
+    @Disabled(value = "Internal issue #82: Can't parse second right parenthesis")
     @ParameterizedTest
     @ValueSource(strings = {
             "ticket82",
@@ -324,7 +324,7 @@ public class TicketSyntaxTests {
         Assertions.assertDoesNotThrow(() -> parserSyntaxTestingUtility.syntaxParseTest(arg));
     }
 
-    @Disabled(value = "Can't parse second right parenthesis")
+    @Disabled(value = "Internal issue #82: Can't parse second right parenthesis")
     @ParameterizedTest
     @ValueSource(strings = {
             "ticket84_1",
@@ -336,7 +336,7 @@ public class TicketSyntaxTests {
         Assertions.assertDoesNotThrow(() -> parserSyntaxTestingUtility.syntaxParseTest(arg));
     }
 
-    @Disabled(value = "Not implemented. Parameter is not allowed on the left side of the FieldList yet.")
+    @Disabled(value = "GH pth_03 #50: Not implemented. Parameter is not allowed on the left side of the FieldList yet.")
     @ParameterizedTest
     @ValueSource(strings = {
             "ticket87",
@@ -348,7 +348,7 @@ public class TicketSyntaxTests {
         Assertions.assertDoesNotThrow(() -> parserSyntaxTestingUtility.syntaxParseTest(arg));
     }
 
-    @Disabled(value = "Not implemented. Parameter is not allowed on the left side of the FieldList yet.")
+    @Disabled(value = "GH pth_03 #50: Not implemented. Parameter is not allowed on the left side of the FieldList yet.")
     @ParameterizedTest
     @ValueSource(strings = {
             "ticket87_1",

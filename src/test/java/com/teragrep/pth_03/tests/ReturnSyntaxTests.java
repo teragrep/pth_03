@@ -56,7 +56,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
 
 public class ReturnSyntaxTests {
-    @Disabled(value = "Grammar has a bug with the aliasParameter")
+    @Disabled(value = "GH pth_03 #43: Grammar has a bug with the aliasParameter")
     @ParameterizedTest(name = "{index} command=''{0}''")
     @ValueSource(strings = {
             "return",

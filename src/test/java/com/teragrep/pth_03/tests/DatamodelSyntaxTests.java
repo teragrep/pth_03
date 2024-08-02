@@ -55,7 +55,7 @@ import org.w3c.dom.NodeList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DatamodelSyntaxTests {
-    @Disabled(value = "Incorrect grammar specification, test fails with valid input")
+    @Disabled(value = "GH pth_03 #41: Incorrect grammar specification, test fails with valid input")
     @ParameterizedTest(name = "{index} command=''{0}''")
     @ValueSource(strings = {
             "datamodel",

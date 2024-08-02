@@ -58,7 +58,7 @@ import org.w3c.dom.NodeList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PredictSyntaxTests {
-    @Disabled(value = "lower and upper options don't parse correctly")
+    @Disabled(value = "Internal issue #117: lower and upper options don't parse correctly")
     @ParameterizedTest(name = "{index} command=''{0}''")
     @ValueSource(strings = {
             "predict",

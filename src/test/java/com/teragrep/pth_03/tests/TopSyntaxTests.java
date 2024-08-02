@@ -56,7 +56,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
 
 public class TopSyntaxTests {
-    @Disabled(value = "Grammar is wrong. Doesn't recognize multiple fields in a FieldListType.")
+    @Disabled(value = "GH pth_03 #47: Grammar is wrong. Doesn't recognize multiple fields in a FieldListType.")
     @ParameterizedTest(name = "{index} command=''{0}''")
     @ValueSource(strings = {
             "top",

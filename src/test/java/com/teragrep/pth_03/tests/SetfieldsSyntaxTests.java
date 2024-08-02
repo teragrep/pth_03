@@ -56,7 +56,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
 
 public class SetfieldsSyntaxTests {
-    @Disabled(value = "Grammar is wrong, doesn't recognize additional setfieldsParameters")
+    @Disabled(value = "GH pth_03 #45: Grammar is wrong, doesn't recognize additional setfieldsParameters")
     @ParameterizedTest(name = "{index} command=''{0}''")
     @ValueSource(strings = {
             "setfields",

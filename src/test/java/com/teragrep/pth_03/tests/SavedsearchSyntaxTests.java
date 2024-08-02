@@ -56,7 +56,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
 
 public class SavedsearchSyntaxTests {
-    @Disabled(value = "Grammar bug, strEQstrParameter is not recognized")
+    @Disabled(value = "GH pth_03 #44: Grammar bug, strEQstrParameter is not recognized")
     @ParameterizedTest(name = "{index} command=''{0}''")
     @ValueSource(strings = {
             "savedsearch",

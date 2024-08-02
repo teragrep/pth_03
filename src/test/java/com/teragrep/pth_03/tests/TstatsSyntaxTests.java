@@ -56,7 +56,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
 
 public class TstatsSyntaxTests {
-    @Disabled(value = "SearchQualifier doesn't parse the String correctly.")
+    @Disabled(value = "GH pth_03 #48: SearchQualifier doesn't parse the String correctly.")
     @ParameterizedTest(name = "{index} command=''{0}''")
     @ValueSource(strings = {
             "tstats",

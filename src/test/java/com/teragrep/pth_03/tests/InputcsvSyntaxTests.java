@@ -56,7 +56,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
 
 public class InputcsvSyntaxTests {
-    @Disabled(value = "Fails to parse after WHERE instruction, bug in logicalStatement")
+    @Disabled(value = "GH pth_03 #42: Fails to parse after WHERE instruction, bug in logicalStatement")
     @ParameterizedTest(name = "{index} command=''{0}''")
     @ValueSource(strings = {
             "inputcsv",

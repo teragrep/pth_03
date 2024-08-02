@@ -56,7 +56,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
 
 public class SetSyntaxTests {
-    @Disabled(value = "Grammar is wrong, should require two subsearchStatements")
+    @Disabled(value = "GH pth_03 #53: Grammar is wrong, should require two subsearchStatements")
     @ParameterizedTest(name = "{index} command=''{0}''")
     @ValueSource(strings = {
             "set",

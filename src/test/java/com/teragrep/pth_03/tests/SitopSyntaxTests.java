@@ -56,7 +56,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
 
 public class SitopSyntaxTests {
-    @Disabled(value = "Grammar is wrong. The integer is parsed as a FieldListType.")
+    @Disabled(value = "GH pth_03 #46: Grammar is wrong. The integer is parsed as a FieldListType.")
     @ParameterizedTest(name = "{index} command=''{0}''")
     @ValueSource(strings = {
             "sitop",
