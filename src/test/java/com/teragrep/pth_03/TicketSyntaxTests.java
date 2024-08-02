@@ -51,6 +51,9 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
+
+import java.lang.reflect.InvocationTargetException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TicketSyntaxTests {
@@ -309,7 +312,7 @@ public class TicketSyntaxTests {
         String fileName = "src/test/resources/antlr4/tickets/" + arg + ".txt";
         ParserSyntaxTestingUtility parserSyntaxTestingUtility
                 = new ParserSyntaxTestingUtility(fileName, false);
-        Assertions.assertThrows(Exception.class, () -> parserSyntaxTestingUtility.syntaxParseTest(arg));
+        Assertions.assertThrows(InvocationTargetException.class, () -> parserSyntaxTestingUtility.syntaxParseTest(arg));
     }
 
     @Disabled(value = "Internal issue #82: Can't parse second right parenthesis")
