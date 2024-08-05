@@ -55,12 +55,15 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class HeadSyntaxTests {
     @ParameterizedTest(name = "{index} command=''{0}''")
     @ValueSource(strings = {
             "head",
             "head2",
             "head4",
+            "head6",
     })
     public void headSyntaxParseTest(String arg) throws Exception {
         String fileName = "src/test/resources/antlr4/commands/head/" + arg + ".txt";
@@ -200,6 +203,21 @@ public class HeadSyntaxTests {
         String fileName = "src/test/resources/antlr4/commands/head/" + arg + ".txt";
         ParserSyntaxTestingUtility parserSyntaxTestingUtility
                 = new ParserSyntaxTestingUtility(fileName, false);
-        Assertions.assertThrows(Exception.class, () -> parserSyntaxTestingUtility.syntaxParseTest(arg));
+        Assertions.assertThrows(InvocationTargetException.class, () -> parserSyntaxTestingUtility.syntaxParseTest(arg));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "head6",
+    })
+    void headWithoutParametersTest(String arg) { // no parameters
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/head/" + arg + ".txt";
+        String headCmd = "/root/transformStatement/headTransformation/value";
+
+        NodeList headNode = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, headCmd, true));
+
+        // Check that 1 found
+        assertEquals(1, headNode.getLength());
     }
 }
