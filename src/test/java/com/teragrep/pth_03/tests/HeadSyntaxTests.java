@@ -152,7 +152,7 @@ public class HeadSyntaxTests {
         String integerExp = "/root/transformStatement/headTransformation/t_head_integerType/value";
         String sortExp = "/root/transformStatement/transformStatement/sortTransformation/value";
 
-        NodeList integerNode = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, integerExp, true));
+        NodeList integerNode = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, integerExp, false));
         NodeList sortNode = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, sortExp, false));
 
         // Check that 1 found
@@ -168,7 +168,7 @@ public class HeadSyntaxTests {
         String fileName = "src/test/resources/antlr4/commands/head/" + arg + ".txt";
         ParserSyntaxTestingUtility parserSyntaxTestingUtility
                 = new ParserSyntaxTestingUtility(fileName, false);
-        Assertions.assertThrows(Exception.class, () -> parserSyntaxTestingUtility.syntaxParseTest(arg));
+        Assertions.assertThrows(InvocationTargetException.class, () -> parserSyntaxTestingUtility.syntaxParseTest(arg));
     }
 
     @ParameterizedTest
@@ -215,7 +215,7 @@ public class HeadSyntaxTests {
         String fileName = "src/test/resources/antlr4/commands/head/" + arg + ".txt";
         String headCmd = "/root/transformStatement/headTransformation/value";
 
-        NodeList headNode = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, headCmd, true));
+        NodeList headNode = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, headCmd, false));
 
         // Check that 1 found
         assertEquals(1, headNode.getLength());
