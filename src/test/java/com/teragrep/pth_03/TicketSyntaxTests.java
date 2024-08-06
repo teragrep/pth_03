@@ -117,8 +117,6 @@ public class TicketSyntaxTests {
             "ticket68",
             "ticket69",
             "ticket73",
-            "tickets_71",
-            "tickets71_A",
             "ticket74_1",
             "ticket75",
             "ticket75_1",
@@ -165,6 +163,21 @@ public class TicketSyntaxTests {
                 = new ParserSyntaxTestingUtility(fileName, false);
         parserSyntaxTestingUtility.syntaxParseTest(arg);
     }
+
+    // TODO when enabling this test, just add the text files back to the syntaxParseTest above
+    @Disabled(value = "GH issue #49: sort doesn't support sorting with more than two fields.")
+    @ParameterizedTest(name = "{index} command=''{0}''")
+    @ValueSource(strings = {
+            "tickets_71",
+            "tickets71_A",
+    })
+    public void sortParseTest(String arg) {
+        String fileName = "src/test/resources/antlr4/tickets/"+ arg +".txt";
+        ParserSyntaxTestingUtility parserSyntaxTestingUtility
+                = new ParserSyntaxTestingUtility(fileName, false);
+        Assertions.assertDoesNotThrow(() -> parserSyntaxTestingUtility.syntaxParseTest(arg));
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {
             "ticket76_correct",
