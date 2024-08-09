@@ -135,6 +135,7 @@ class ParseTreeToXmlTest {
                 "            </whereTransformation>\n" +
                 "        </transformStatement>\n" +
                 "    </transformStatement>\n" +
+                "    <EOF/>\n" +
                 "</root>\n" ;
         CharStream inputStream = CharStreams.fromString(q);
         DPLLexer lexer = new DPLLexer(inputStream);

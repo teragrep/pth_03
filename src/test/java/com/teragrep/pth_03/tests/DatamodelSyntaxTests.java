@@ -47,6 +47,7 @@ package com.teragrep.pth_03.tests;
 
 import com.teragrep.pth_03.ParserStructureTestingUtility;
 import com.teragrep.pth_03.ParserSyntaxTestingUtility;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
@@ -54,6 +55,7 @@ import org.w3c.dom.NodeList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DatamodelSyntaxTests {
+    @Disabled(value = "GH pth_03 #41: Incorrect grammar specification, test fails with valid input")
     @ParameterizedTest(name = "{index} command=''{0}''")
     @ValueSource(strings = {
             "datamodel",

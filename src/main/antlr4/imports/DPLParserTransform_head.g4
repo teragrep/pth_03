@@ -46,7 +46,8 @@
 parser grammar DPLParserTransform_head;
         //syntax = <stats-agg> (as <wc-field>)? not sure if done correctly. Also, should binSpans-s be in one bracket?
 headTransformation
-        : COMMAND_MODE_HEAD ((COMMAND_HEAD_MODE_INTEGER)|t_head_evalParameter)? (t_head_limitParameter)? (t_head_nullParameter)? (t_head_keepLastParameter)?
+        : COMMAND_MODE_HEAD (t_head_nullParameter | t_head_keepLastParameter)*? t_head_integerType? (t_head_nullParameter | t_head_keepLastParameter)*?
+        | COMMAND_MODE_HEAD (t_head_limitParameter | t_head_nullParameter | t_head_keepLastParameter)*? t_head_evalParameter? (t_head_limitParameter | t_head_nullParameter | t_head_keepLastParameter)*?
         ;
 
 t_head_keepLastParameter
@@ -62,4 +63,8 @@ t_head_nullParameter
         ;
 t_head_evalParameter
         : COMMAND_HEAD_MODE_PARENTHESIS_L evalStatement EVAL_LANGUAGE_MODE_PARENTHESIS_R
+        ;
+
+t_head_integerType
+        : COMMAND_HEAD_MODE_INTEGER
         ;

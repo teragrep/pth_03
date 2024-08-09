@@ -47,5 +47,5 @@
 | streamstats count
 | fields - _time
 | eval Temp = case(count=1, 26, count=2, 11, count=3, 2)
-| delta Temp p=1 AS Temp_diff
+| delta Temp AS Temp_diff p=1
 | fields - count

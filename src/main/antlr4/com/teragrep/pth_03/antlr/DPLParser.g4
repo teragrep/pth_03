@@ -54,7 +54,7 @@ import DPLParserTransform;
 options { tokenVocab=DPLLexer; }
 
 root
-        : searchTransformationRoot? (PIPE transformStatement)?
+        : searchTransformationRoot? (PIPE transformStatement)? EOF
         ;
 
 searchTransformationRoot
