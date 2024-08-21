@@ -135,11 +135,11 @@ t_bloomOptionParameter
         ;
 
 t_hostParameter
-        : COMMAND_TERAGREP_MODE_HOST t_portParameter COMMAND_TERAGREP_MODE_PORT COMMAND_TERAGREP_MODE_PORT_NUM
+        : COMMAND_TERAGREP_MODE_HOST t_portParameter COMMAND_TERAGREP_MODE_PORT COMMAND_TERAGREP_IP_MODE_PORT_NUM
         ;
 
 t_portParameter
-        : COMMAND_TERAGREP_IP
+        : COMMAND_TERAGREP_IP_MODE_IP
         ;
 
 t_overwriteParameter
