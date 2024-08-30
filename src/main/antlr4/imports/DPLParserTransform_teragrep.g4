@@ -111,7 +111,7 @@ t_loadModeParameter
         ;
 
 t_saveModeParameter
-        : COMMAND_TERAGREP_MODE_HDFS COMMAND_TERAGREP_MODE_SAVE (t_pathParameter|t_retentionParameter|t_overwriteParameter|t_hdfsFormatParameter|t_headerParameter)*
+        : COMMAND_TERAGREP_MODE_HDFS COMMAND_TERAGREP_MODE_SAVE (t_codecParameter|t_pathParameter|t_retentionParameter|t_overwriteParameter|t_hdfsFormatParameter|t_headerParameter)*
         ;
 
 t_deleteModeParameter
@@ -175,4 +175,8 @@ t_schemaParameter
 
 t_retentionParameter
         : COMMAND_TERAGREP_MODE_RETENTION spanType
+        ;
+
+t_codecParameter
+        : COMMAND_TERAGREP_MODE_CODEC stringType
         ;
