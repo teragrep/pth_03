@@ -48,6 +48,7 @@ package com.teragrep.pth_03.tests;
 import com.teragrep.pth_03.ParserStructureTestingUtility;
 import com.teragrep.pth_03.ParserSyntaxTestingUtility;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
@@ -72,6 +73,8 @@ public class TeragrepSyntaxTests {
             "teragrep_csv_schema",
             "teragrep_csv_header",
             "teragrep_archive_summary",
+            "teragrep_hdfs_save_all_params",
+            "teragrep_hdfs_save_codec",
             "teragrep_syslog_stream",
             "teragrep_syslog_stream_host_port"
     })
@@ -303,5 +306,56 @@ public class TeragrepSyntaxTests {
         assertEquals(1,hostNodes.getLength());
         assertEquals(1,portNodes.getLength());
         assertEquals(1,evalNodes.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep_hdfs_save_codec",
+    })
+    void testHdfsSaveCompression(String arg) {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String hdfsSavePath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_saveModeParameter";
+        String codecPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_saveModeParameter/t_codecParameter";
+
+        NodeList saveNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, hdfsSavePath, false));
+        NodeList codecNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, codecPath, false));
+
+        // Check that 1 found
+        assertEquals(1, saveNodes.getLength());
+        assertEquals(1, codecNodes.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep_hdfs_save_all_params",
+    })
+    void testHdfsSaveAllParameters(String arg) {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String hdfsSavePath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_saveModeParameter";
+        String codecPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_saveModeParameter/t_codecParameter";
+        String retentionPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_saveModeParameter/t_retentionParameter";
+        String overwritePath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_saveModeParameter/t_overwriteParameter";
+        String formatPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_saveModeParameter/t_hdfsFormatParameter";
+        String headerPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_saveModeParameter/t_headerParameter";
+        String pathPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_saveModeParameter/t_pathParameter";
+
+        NodeList saveNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, hdfsSavePath, false));
+        NodeList codecNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, codecPath, false));
+        NodeList retentionNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, retentionPath, false));
+        NodeList overwriteNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, overwritePath, false));
+        NodeList formatNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, formatPath, false));
+        NodeList headerNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, headerPath, false));
+        NodeList pathNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, pathPath, false));
+
+        // Check that 1 found
+        assertEquals(1, saveNodes.getLength());
+        assertEquals(1, codecNodes.getLength());
+        assertEquals(1, retentionNodes.getLength());
+        assertEquals(1, overwriteNodes.getLength());
+        assertEquals(1, formatNodes.getLength());
+        assertEquals(1, headerNodes.getLength());
+        assertEquals(1, pathNodes.getLength());
     }
 }
