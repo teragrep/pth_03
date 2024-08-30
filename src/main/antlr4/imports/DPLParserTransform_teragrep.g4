@@ -67,7 +67,7 @@ t_dynatraceParameter
         ;
 
 t_tokenizerParameter
-        : COMMAND_TERAGREP_MODE_TOKENIZER t_formatParameter? t_inputParamater? t_outputParameter?
+        : COMMAND_TERAGREP_MODE_TOKENIZER t_formatParameter? t_inputParamater? t_outputParameter? t_patternParameter?
         ;
 
 t_formatParameter
