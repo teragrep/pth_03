@@ -55,6 +55,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class EvalSyntaxTests {
     @ParameterizedTest(name = "{index} command=''{0}''")
     @ValueSource(strings = {
@@ -493,5 +495,17 @@ public class EvalSyntaxTests {
 
         NodeList numberNode2 = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, numberParam2, false));
         assertEquals(1, numberNode2.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "missingParameterInIf"
+    })
+    void missingParameterInIfTest(String arg) {
+        String fileName = "src/test/resources/antlr4/commands/eval/" + arg + ".txt";
+        ParserSyntaxTestingUtility pstu = new ParserSyntaxTestingUtility(fileName,false);
+
+        // Invalid syntax should throw an exception.
+        Assertions.assertThrows(InvocationTargetException.class, () -> pstu.syntaxParseTest(arg));
     }
 }
