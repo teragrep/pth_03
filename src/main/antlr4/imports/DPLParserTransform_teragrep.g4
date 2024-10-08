@@ -59,6 +59,7 @@ t_execParameter
         | t_kafkaSaveModeParameter
         | t_bloomModeParameter
         | t_tokenizerParameter
+        | t_regexextractParameter
         | t_dynatraceParameter)
         ;
 
@@ -67,14 +68,22 @@ t_dynatraceParameter
         ;
 
 t_tokenizerParameter
-        : COMMAND_TERAGREP_MODE_TOKENIZER t_formatParameter? t_inputParamater? t_outputParameter?
+        : COMMAND_TERAGREP_MODE_TOKENIZER t_formatParameter? t_inputParameter? t_outputParameter?
+        ;
+
+t_regexextractParameter
+        : COMMAND_TERAGREP_MODE_REGEXEXTRACT t_regexParameter? t_inputParameter? t_outputParameter?
         ;
 
 t_formatParameter
         : COMMAND_TERAGREP_MODE_FORMAT stringType
         ;
 
-t_inputParamater
+t_regexParameter
+        : COMMAND_TERAGREP_MODE_REGEX stringType
+        ;
+
+t_inputParameter
         : COMMAND_TERAGREP_MODE_INPUT fieldType
         ;
 
@@ -131,7 +140,7 @@ t_getArchiveSummaryParameter
         ;
 
 t_bloomOptionParameter
-        : COMMAND_TERAGREP_MODE_UPDATE t_estimatesParameter? t_inputParamater? | COMMAND_TERAGREP_MODE_CREATE t_estimatesParameter? t_inputParamater? | COMMAND_TERAGREP_MODE_ESTIMATE t_inputParamater? t_outputParameter?
+        : COMMAND_TERAGREP_MODE_UPDATE t_estimatesParameter? t_inputParameter? | COMMAND_TERAGREP_MODE_CREATE t_estimatesParameter? t_inputParameter? | COMMAND_TERAGREP_MODE_ESTIMATE t_inputParameter? t_outputParameter?
         ;
 
 t_hostParameter
