@@ -48,7 +48,6 @@ package com.teragrep.pth_03.tests;
 import com.teragrep.pth_03.ParserStructureTestingUtility;
 import com.teragrep.pth_03.ParserSyntaxTestingUtility;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
@@ -357,5 +356,41 @@ public class TeragrepSyntaxTests {
         assertEquals(1, formatNodes.getLength());
         assertEquals(1, headerNodes.getLength());
         assertEquals(1, pathNodes.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep_regexextract",
+    })
+    void testRegexExtract(String arg) {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String regexextractPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_regexextractParameter";
+        NodeList regexextractNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, regexextractPath, false));
+        // Check that 1 found
+        assertEquals(1, regexextractNodes.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep_regexextract_params",
+    })
+    void testRegexExtractWithParams(String arg) {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String regexextractPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_regexextractParameter";
+        String regexPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_regexextractParameter/t_regexParameter";
+        String inputPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_regexextractParameter/t_inputParameter";
+        String outputPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_regexextractParameter/t_outputParameter";
+        NodeList regexextractNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, regexextractPath, true));
+        NodeList regexNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, regexPath, false));
+        NodeList inputNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, inputPath, false));
+        NodeList outputNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, outputPath, false));
+
+        // Check that 1 found for each path
+        assertEquals(1, regexextractNodes.getLength());
+        assertEquals(1, regexNodes.getLength());
+        assertEquals(1, inputNodes.getLength());
+        assertEquals(1, outputNodes.getLength());
     }
 }
