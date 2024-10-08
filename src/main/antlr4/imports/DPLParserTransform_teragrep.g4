@@ -59,6 +59,7 @@ t_execParameter
         | t_kafkaSaveModeParameter
         | t_bloomModeParameter
         | t_tokenizerParameter
+        | t_regexextractParameter
         | t_dynatraceParameter)
         ;
 
@@ -70,7 +71,15 @@ t_tokenizerParameter
         : COMMAND_TERAGREP_MODE_TOKENIZER t_formatParameter? t_inputParamater? t_outputParameter?
         ;
 
+t_regexextractParameter
+        : COMMAND_TERAGREP_MODE_REGEXEXTRACT t_regexParameter? t_inputParamater? t_outputParameter?
+        ;
+
 t_formatParameter
+        : COMMAND_TERAGREP_MODE_FORMAT stringType
+        ;
+
+t_regexParameter
         : COMMAND_TERAGREP_MODE_FORMAT stringType
         ;
 

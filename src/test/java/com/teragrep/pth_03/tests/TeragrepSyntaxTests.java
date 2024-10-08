@@ -48,7 +48,6 @@ package com.teragrep.pth_03.tests;
 import com.teragrep.pth_03.ParserStructureTestingUtility;
 import com.teragrep.pth_03.ParserSyntaxTestingUtility;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
@@ -357,5 +356,18 @@ public class TeragrepSyntaxTests {
         assertEquals(1, formatNodes.getLength());
         assertEquals(1, headerNodes.getLength());
         assertEquals(1, pathNodes.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep_regexextract",
+    })
+    void xpathTestRegexExtract(String arg) {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String regexextractPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_regexextractParameter";
+        NodeList nodesA = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, regexextractPath, true));
+        // Check that 1 found
+        assertEquals(1,nodesA.getLength());
     }
 }
