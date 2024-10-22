@@ -60,7 +60,12 @@ t_execParameter
         | t_bloomModeParameter
         | t_tokenizerParameter
         | t_regexextractParameter
-        | t_dynatraceParameter)
+        | t_dynatraceParameter
+        | t_forEachBatchParameter)
+        ;
+
+t_forEachBatchParameter
+        : COMMAND_TERAGREP_MODE_FOREACHBATCH
         ;
 
 t_dynatraceParameter
