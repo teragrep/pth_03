@@ -75,7 +75,9 @@ public class TeragrepSyntaxTests {
             "teragrep_hdfs_save_all_params",
             "teragrep_hdfs_save_codec",
             "teragrep_syslog_stream",
-            "teragrep_syslog_stream_host_port"
+            "teragrep_syslog_stream_host_port",
+            "teragrep_foreachbatch",
+            "teragrep_foreachbatch_transformStatement"
     })
     public void teragrepSyntaxParseTest(String arg) {
         String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
@@ -392,5 +394,37 @@ public class TeragrepSyntaxTests {
         assertEquals(1, regexNodes.getLength());
         assertEquals(1, inputNodes.getLength());
         assertEquals(1, outputNodes.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep_foreachbatch",
+    })
+    void testTeragrepForEachBatch(String arg) {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+
+        String febParamPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_forEachBatchParameter";
+        NodeList febParamNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, febParamPath, false));
+
+        // Check that 1 found for each path
+        assertEquals(1, febParamNodes.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep_foreachbatch_transformStatement",
+    })
+    void testTeragrepForEachBatchWithTransformStatement(String arg) {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+
+        String febParamPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_forEachBatchParameter";
+        String transformStmtPath = "/root/transformStatement/transformStatement/statsTransformation";
+        NodeList febParamNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, febParamPath, false));
+        NodeList transformStmtNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, transformStmtPath, false));
+
+        assertEquals(1, febParamNodes.getLength());
+        assertEquals(1, transformStmtNodes.getLength());
     }
 }
