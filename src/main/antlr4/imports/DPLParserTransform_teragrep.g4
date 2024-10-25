@@ -46,7 +46,7 @@
 parser grammar DPLParserTransform_teragrep;
 
 teragrepTransformation
-        : COMMAND_MODE_TERAGREP ( t_execParameter | t_getParameter)
+        : COMMAND_MODE_TERAGREP ( t_execParameter | t_getParameter | t_setParameter )
         ;
 
 t_execParameter
@@ -133,7 +133,23 @@ t_listModeParameter
         ;
 
 t_getParameter
-        : (COMMAND_TERAGREP_MODE_GET | COMMAND_TERAGREP_MODE_SET) (t_getTeragrepVersionParameter | t_getArchiveSummaryParameter) numberType?
+        : COMMAND_TERAGREP_MODE_GET (t_getTeragrepVersionParameter | t_getArchiveSummaryParameter | COMMAND_TERAGREP_MODE_CONFIG)
+        ;
+
+t_setParameter
+        : COMMAND_TERAGREP_MODE_SET t_setConfigParameter
+        ;
+
+t_setConfigParameter
+        : COMMAND_TERAGREP_MODE_CONFIG t_configKeyParameter t_configValueParameter
+        ;
+
+t_configKeyParameter
+        : stringType
+        ;
+
+t_configValueParameter
+        : stringType
         ;
 
 t_getTeragrepVersionParameter
