@@ -78,7 +78,8 @@ public class TeragrepSyntaxTests {
             "teragrep_syslog_stream_host_port",
             "teragrep_foreachbatch",
             "teragrep_foreachbatch_transformStatement",
-            "teragrep_config_set"
+            "teragrep_config_set",
+            "teragrep_config_get"
     })
     public void teragrepSyntaxParseTest(String arg) {
         String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
@@ -444,5 +445,21 @@ public class TeragrepSyntaxTests {
 
         assertEquals(1, configKeyNodes.getLength());
         assertEquals(1, configValueNodes.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep_config_get",
+    })
+    void testTeragrepGetConfig(String arg) {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+
+        String configGetPath = "/root/transformStatement/teragrepTransformation/t_getParameter/value";
+        NodeList configGetNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, configGetPath, false));
+
+        Assertions.assertEquals(2, configGetNodes.getLength());
+        Assertions.assertEquals("get", configGetNodes.item(0).getTextContent());
+        Assertions.assertEquals("config", configGetNodes.item(1).getTextContent());
     }
 }

@@ -133,7 +133,7 @@ t_listModeParameter
         ;
 
 t_getParameter
-        : COMMAND_TERAGREP_MODE_GET (t_getTeragrepVersionParameter | t_getArchiveSummaryParameter)
+        : COMMAND_TERAGREP_MODE_GET (t_getTeragrepVersionParameter | t_getArchiveSummaryParameter | COMMAND_TERAGREP_MODE_CONFIG)
         ;
 
 t_setParameter
