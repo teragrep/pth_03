@@ -79,7 +79,9 @@ public class TeragrepSyntaxTests {
             "teragrep_foreachbatch",
             "teragrep_foreachbatch_transformStatement",
             "teragrep_config_set",
-            "teragrep_config_get"
+            "teragrep_config_get",
+            "teragrep_bloom_create_table",
+            "teragrep_bloom_update_table"
     })
     public void teragrepSyntaxParseTest(String arg) {
         String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
@@ -360,6 +362,52 @@ public class TeragrepSyntaxTests {
         assertEquals(1, formatNodes.getLength());
         assertEquals(1, headerNodes.getLength());
         assertEquals(1, pathNodes.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep_bloom_create_table"
+    })
+    void testBloomCreateTableName(String arg) {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String tableParamPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_bloomModeParameter/t_bloomOptionParameter/t_tableParameter";
+        String tableNamePath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_bloomModeParameter/t_bloomOptionParameter/t_tableParameter/fieldType/value";
+        String optionModePath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_bloomModeParameter/t_bloomOptionParameter/value";
+
+        NodeList tableParamNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, tableParamPath, false));
+        NodeList tableNameNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, tableNamePath, false));
+        NodeList createNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, optionModePath, false));
+
+        assertEquals(1, tableParamNodes.getLength());
+        assertEquals(1, tableNameNodes.getLength());
+        assertEquals(1, createNodes.getLength());
+
+        assertEquals("myTable", tableNameNodes.item(0).getTextContent());
+        assertEquals("create", createNodes.item(0).getTextContent());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep_bloom_update_table"
+    })
+    void testBloomUpdateTableName(String arg) {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String tableParamPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_bloomModeParameter/t_bloomOptionParameter/t_tableParameter";
+        String tableNamePath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_bloomModeParameter/t_bloomOptionParameter/t_tableParameter/fieldType/value";
+        String optionModePath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_bloomModeParameter/t_bloomOptionParameter/value";
+
+        NodeList tableParamNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, tableParamPath, false));
+        NodeList tableNameNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, tableNamePath, false));
+        NodeList updateNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, optionModePath, false));
+
+        assertEquals(1, tableParamNodes.getLength());
+        assertEquals(1, tableNameNodes.getLength());
+        assertEquals(1, updateNodes.getLength());
+
+        assertEquals("myTable", tableNameNodes.item(0).getTextContent());
+        assertEquals("update", updateNodes.item(0).getTextContent());
     }
 
     @ParameterizedTest
