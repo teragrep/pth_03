@@ -161,7 +161,11 @@ t_getArchiveSummaryParameter
         ;
 
 t_bloomOptionParameter
-        : COMMAND_TERAGREP_MODE_UPDATE t_estimatesParameter? t_inputParameter? | COMMAND_TERAGREP_MODE_CREATE t_estimatesParameter? t_inputParameter? | COMMAND_TERAGREP_MODE_ESTIMATE t_inputParameter? t_outputParameter?
+        : COMMAND_TERAGREP_MODE_UPDATE t_tableParameter? t_regexParameter? t_estimatesParameter? t_inputParameter? | COMMAND_TERAGREP_MODE_CREATE t_tableParameter? t_regexParameter? t_estimatesParameter? t_inputParameter? | COMMAND_TERAGREP_MODE_ESTIMATE t_inputParameter? t_outputParameter?
+        ;
+
+t_tableParameter
+        : COMMAND_TERAGREP_MODE_TABLE fieldType
         ;
 
 t_hostParameter
