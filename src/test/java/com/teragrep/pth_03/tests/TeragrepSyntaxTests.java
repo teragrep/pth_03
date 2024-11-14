@@ -81,7 +81,9 @@ public class TeragrepSyntaxTests {
             "teragrep_config_set",
             "teragrep_config_get",
             "teragrep_bloom_create_table",
-            "teragrep_bloom_update_table"
+            "teragrep_bloom_update_table",
+            "teragrep_bloom_create_regex",
+            "teragrep_bloom_update_regex"
     })
     public void teragrepSyntaxParseTest(String arg) {
         String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
@@ -407,6 +409,52 @@ public class TeragrepSyntaxTests {
         assertEquals(1, updateNodes.getLength());
 
         assertEquals("myTable", tableNameNodes.item(0).getTextContent());
+        assertEquals("update", updateNodes.item(0).getTextContent());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep_bloom_create_regex"
+    })
+    void testBloomCreateRegex(String arg) {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String regexParamPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_bloomModeParameter/t_bloomOptionParameter/t_regexParameter";
+        String regexPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_bloomModeParameter/t_bloomOptionParameter/t_regexParameter/stringType/value";
+        String optionModePath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_bloomModeParameter/t_bloomOptionParameter/value";
+
+        NodeList regexParamNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, regexParamPath, false));
+        NodeList regexNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, regexPath, false));
+        NodeList createNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, optionModePath, false));
+
+        assertEquals(1, regexParamNodes.getLength());
+        assertEquals(1, regexNodes.getLength());
+        assertEquals(1, createNodes.getLength());
+
+        assertEquals("\\w{4}", regexNodes.item(0).getTextContent());
+        assertEquals("create", createNodes.item(0).getTextContent());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "teragrep_bloom_update_regex"
+    })
+    void testBloomUpdateRegex(String arg) {
+        ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        String fileName = "src/test/resources/antlr4/commands/teragrep/" + arg + ".txt";
+        String regexParamPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_bloomModeParameter/t_bloomOptionParameter/t_regexParameter";
+        String regexPath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_bloomModeParameter/t_bloomOptionParameter/t_regexParameter/stringType/value";
+        String optionModePath = "/root/transformStatement/teragrepTransformation/t_execParameter/t_bloomModeParameter/t_bloomOptionParameter/value";
+
+        NodeList regexParamNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, regexParamPath, false));
+        NodeList regexNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, regexPath, false));
+        NodeList updateNodes = Assertions.assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, optionModePath, false));
+
+        assertEquals(1, regexParamNodes.getLength());
+        assertEquals(1, regexNodes.getLength());
+        assertEquals(1, updateNodes.getLength());
+
+        assertEquals("\\w{4}", regexNodes.item(0).getTextContent());
         assertEquals("update", updateNodes.item(0).getTextContent());
     }
 
