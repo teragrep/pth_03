@@ -48,6 +48,7 @@ package com.teragrep.pth_03.tests;
 import com.teragrep.pth_03.ParserStructureTestingUtility;
 import com.teragrep.pth_03.ParserSyntaxTestingUtility;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.params.ParameterizedTest;
@@ -67,6 +68,7 @@ public class TimechartSyntaxTests {
             "timechart9",
             "timechart10",
             "timechart11",
+            "timechartEvaledField"
     })
     public void timechartSyntaxParseTest(String arg) throws Exception {
         String fileName = "src/test/resources/antlr4/commands/timechart/" + arg + ".txt";
@@ -148,7 +150,7 @@ public class TimechartSyntaxTests {
     void xpathTest6(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/timechart/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/timechartTransformation/aggregateFunction/aggregateMethodCount/value[1]";
+        String xpathExp = "/root/transformStatement/timechartTransformation/t_timechart_aggregation/aggregateFunction/aggregateMethodCount/value[1]";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
@@ -187,7 +189,7 @@ public class TimechartSyntaxTests {
     void xpathTest9(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/timechart/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/timechartTransformation/aggregateFunction/aggregateMethodCount/value";
+        String xpathExp = "/root/transformStatement/timechartTransformation/t_timechart_aggregation/aggregateFunction/aggregateMethodCount/value";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
@@ -343,7 +345,7 @@ public class TimechartSyntaxTests {
     void xpathTest21(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/timechart/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/timechartTransformation/aggregateFunction/aggregateMethodAvg/aggregate_fieldType/value";
+        String xpathExp = "/root/transformStatement/timechartTransformation/t_timechart_aggregation/aggregateFunction/aggregateMethodAvg/aggregate_fieldType/value";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
@@ -411,7 +413,7 @@ public class TimechartSyntaxTests {
 	void xpathTest26(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/timechart/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/timechartTransformation/t_timechart_fieldRenameInstruction/fieldType/value";
+        String xpathExp = "/root/transformStatement/timechartTransformation/t_timechart_aggParameter/t_timechart_fieldRenameInstruction/fieldType/value";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
@@ -425,11 +427,71 @@ public class TimechartSyntaxTests {
     void xpathTest27(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/timechart/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/timechartTransformation/aggregateFunction/aggregateMethodPercentileVariable/aggregate_fieldType/value";
+        String xpathExp = "/root/transformStatement/timechartTransformation/t_timechart_aggregation/aggregateFunction/aggregateMethodPercentileVariable/aggregate_fieldType/value";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
         assertEquals(1,nodesA.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "timechart11",
+    })
+    public void testAggregationWithRename(String arg) {
+        final ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        final String fileName = "src/test/resources/antlr4/commands/timechart/" + arg + ".txt";
+
+        final String aggregateFunctionPath = "/root/transformStatement/timechartTransformation/t_timechart_aggregation/aggregateFunction/aggregateMethodSum/aggregate_fieldType/value";
+        final String renamePath = "root/transformStatement/timechartTransformation/t_timechart_aggregation/t_timechart_fieldRenameInstruction/fieldType/value";
+
+        NodeList aggregateFunctionNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, aggregateFunctionPath, false));
+        NodeList renameNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, renamePath, false));
+
+        assertEquals(1, aggregateFunctionNodes.getLength());
+        assertEquals(1, renameNodes.getLength());
+        assertEquals("sales", aggregateFunctionNodes.item(0).getTextContent());
+        assertEquals("sales", renameNodes.item(0).getTextContent());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "timechart4",
+    })
+    public void testAggParameterWithRename(String arg) {
+        final ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        final String fileName = "src/test/resources/antlr4/commands/timechart/" + arg + ".txt";
+
+        final String aggregateFunctionPath = "/root/transformStatement/timechartTransformation/t_timechart_aggParameter/aggregateFunction/aggregateMethodCount/aggregate_fieldType/value";
+        final String renamePath = "root/transformStatement/timechartTransformation/t_timechart_aggParameter/t_timechart_fieldRenameInstruction/fieldType/value";
+
+        NodeList aggregateFunctionNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, aggregateFunctionPath, false));
+        NodeList renameNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, renamePath, false));
+
+        assertEquals(1, aggregateFunctionNodes.getLength());
+        assertEquals(1, renameNodes.getLength());
+        assertEquals("ddd", aggregateFunctionNodes.item(0).getTextContent());
+        assertEquals("D", renameNodes.item(0).getTextContent());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "timechartEvaledField",
+    })
+    public void testEvaledFieldWithRename(String arg) {
+        final ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        final String fileName = "src/test/resources/antlr4/commands/timechart/" + arg + ".txt";
+
+        final String evalPath = "/root/transformStatement/timechartTransformation/t_timechart_evaledField/evalStatement/evalFunctionStatement/evalMethodRound/evalStatement/evalFieldType/value";
+        final String renamePath = "root/transformStatement/timechartTransformation/t_timechart_evaledField/t_timechart_fieldRenameInstruction/fieldType/value";
+
+        NodeList evalNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, evalPath, false));
+        NodeList renameNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, renamePath, false));
+
+        assertEquals(1, evalNodes.getLength());
+        assertEquals(1, renameNodes.getLength());
+        assertEquals("sales", evalNodes.item(0).getTextContent());
+        assertEquals("rounded_sales", renameNodes.item(0).getTextContent());
     }
 }
 
