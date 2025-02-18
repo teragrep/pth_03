@@ -483,8 +483,8 @@ public class TimechartSyntaxTests {
         final ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         final String fileName = "src/test/resources/antlr4/commands/timechart/" + arg + ".txt";
 
-        final String evalPath = "/root/transformStatement/timechartTransformation/t_timechart_renamedEvaledField/t_timechart_evaledField/evalStatement/evalFunctionStatement/evalMethodRound/evalStatement/evalFieldType/value";
-        final String renamePath = "root/transformStatement/timechartTransformation/t_timechart_renamedEvaledField/t_timechart_fieldRenameInstruction/fieldType/value";
+        final String evalPath = "/root/transformStatement/timechartTransformation/t_timechart_renameableEvaledField/t_timechart_evaledField/evalStatement/evalFunctionStatement/evalMethodRound/evalStatement/evalFieldType/value";
+        final String renamePath = "root/transformStatement/timechartTransformation/t_timechart_renameableEvaledField/t_timechart_fieldRenameInstruction/fieldType/value";
 
         final NodeList evalNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, evalPath, false));
         final NodeList renameNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, renamePath, false));
