@@ -68,7 +68,8 @@ public class TimechartSyntaxTests {
             "timechart9",
             "timechart10",
             "timechart11",
-            "timechartEvaledField"
+            "timechartEvaledField",
+            "timechartAggParamEval"
     })
     public void timechartSyntaxParseTest(String arg) throws Exception {
         String fileName = "src/test/resources/antlr4/commands/timechart/" + arg + ".txt";
@@ -445,8 +446,8 @@ public class TimechartSyntaxTests {
         final String aggregateFunctionPath = "/root/transformStatement/timechartTransformation/t_timechart_aggregation/aggregateFunction/aggregateMethodSum/aggregate_fieldType/value";
         final String renamePath = "root/transformStatement/timechartTransformation/t_timechart_aggregation/t_timechart_fieldRenameInstruction/fieldType/value";
 
-        NodeList aggregateFunctionNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, aggregateFunctionPath, false));
-        NodeList renameNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, renamePath, false));
+        final NodeList aggregateFunctionNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, aggregateFunctionPath, false));
+        final NodeList renameNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, renamePath, false));
 
         assertEquals(1, aggregateFunctionNodes.getLength());
         assertEquals(1, renameNodes.getLength());
@@ -465,8 +466,8 @@ public class TimechartSyntaxTests {
         final String aggregateFunctionPath = "/root/transformStatement/timechartTransformation/t_timechart_aggParameter/aggregateFunction/aggregateMethodCount/aggregate_fieldType/value";
         final String renamePath = "root/transformStatement/timechartTransformation/t_timechart_aggParameter/t_timechart_fieldRenameInstruction/fieldType/value";
 
-        NodeList aggregateFunctionNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, aggregateFunctionPath, false));
-        NodeList renameNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, renamePath, false));
+        final NodeList aggregateFunctionNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, aggregateFunctionPath, false));
+        final NodeList renameNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, renamePath, false));
 
         assertEquals(1, aggregateFunctionNodes.getLength());
         assertEquals(1, renameNodes.getLength());
@@ -482,16 +483,36 @@ public class TimechartSyntaxTests {
         final ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         final String fileName = "src/test/resources/antlr4/commands/timechart/" + arg + ".txt";
 
-        final String evalPath = "/root/transformStatement/timechartTransformation/t_timechart_evaledField/evalStatement/evalFunctionStatement/evalMethodRound/evalStatement/evalFieldType/value";
-        final String renamePath = "root/transformStatement/timechartTransformation/t_timechart_evaledField/t_timechart_fieldRenameInstruction/fieldType/value";
+        final String evalPath = "/root/transformStatement/timechartTransformation/t_timechart_renamedEvaledField/t_timechart_evaledField/evalStatement/evalFunctionStatement/evalMethodRound/evalStatement/evalFieldType/value";
+        final String renamePath = "root/transformStatement/timechartTransformation/t_timechart_renamedEvaledField/t_timechart_fieldRenameInstruction/fieldType/value";
 
-        NodeList evalNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, evalPath, false));
-        NodeList renameNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, renamePath, false));
+        final NodeList evalNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, evalPath, false));
+        final NodeList renameNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, renamePath, false));
 
         assertEquals(1, evalNodes.getLength());
         assertEquals(1, renameNodes.getLength());
         assertEquals("sales", evalNodes.item(0).getTextContent());
         assertEquals("rounded_sales", renameNodes.item(0).getTextContent());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "timechartAggParamEval",
+    })
+    public void testEvaledFieldInAggParam(String arg) {
+        final ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
+        final String fileName = "src/test/resources/antlr4/commands/timechart/" + arg + ".txt";
+
+        final String aggPath = "/root/transformStatement/timechartTransformation/t_timechart_aggParameter/value";
+        final String evalPath = "/root/transformStatement/timechartTransformation/t_timechart_aggParameter/t_timechart_evaledField/evalStatement/evalFunctionStatement/evalMethodRound/evalStatement/evalFieldType/value";
+
+        final NodeList aggNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, aggPath, false));
+        final NodeList evalNodes = assertDoesNotThrow(() -> (NodeList) pstu.xpathQueryFile(fileName, evalPath, false));
+
+        assertEquals(1, aggNodes.getLength());
+        assertEquals(1, evalNodes.getLength());
+        assertEquals("agg=", aggNodes.item(0).getTextContent());
+        assertEquals("sales", evalNodes.item(0).getTextContent());
     }
 }
 

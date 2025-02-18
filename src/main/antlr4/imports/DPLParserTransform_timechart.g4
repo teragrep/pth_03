@@ -46,7 +46,7 @@
 parser grammar DPLParserTransform_timechart;
 
 timechartTransformation
-        : COMMAND_MODE_TIMECHART (t_timechart_sepParameter | t_timechart_formatParameter | t_timechart_partialParameter | t_timechart_fixedrangeParameter | t_timechart_contParameter | t_timechart_limitParameter)*? (t_timechart_aggParameter)*? (t_timechart_binOptParameter)*? ((t_timechart_aggregation | t_timechart_evaledField) t_timechart_divideByInstruction?)+ t_timechart_dedupSplitParameter?
+        : COMMAND_MODE_TIMECHART (t_timechart_sepParameter | t_timechart_formatParameter | t_timechart_partialParameter | t_timechart_fixedrangeParameter | t_timechart_contParameter | t_timechart_limitParameter)*? (t_timechart_aggParameter)*? (t_timechart_binOptParameter)*? ((t_timechart_aggregation | t_timechart_renamedEvaledField) t_timechart_divideByInstruction?)+ t_timechart_dedupSplitParameter?
         ;
 
 t_timechart_aggParameter
@@ -154,7 +154,11 @@ t_timechart_useotherParameter
 
 
 t_timechart_evaledField
-        : COMMAND_TIMECHART_MODE_EVAL_PARENTHESIS_L evalStatement EVAL_LANGUAGE_MODE_PARENTHESIS_R t_timechart_fieldRenameInstruction?
+        : COMMAND_TIMECHART_MODE_EVAL_PARENTHESIS_L evalStatement EVAL_LANGUAGE_MODE_PARENTHESIS_R
+        ;
+
+t_timechart_renamedEvaledField
+        : t_timechart_evaledField t_timechart_fieldRenameInstruction?
         ;
 
 t_timechart_fieldRenameInstruction
