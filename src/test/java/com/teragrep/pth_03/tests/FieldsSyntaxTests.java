@@ -50,6 +50,7 @@ import com.teragrep.pth_03.ParserSyntaxTestingUtility;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
@@ -59,6 +60,7 @@ public class FieldsSyntaxTests {
     @ValueSource(strings = {
             "fields",
             "fields2",
+            "fields_wildcard"
     })
     public void fieldsSyntaxParseTest(String arg) throws Exception {
         String fileName = "src/test/resources/antlr4/commands/fields/" + arg + ".txt";
@@ -69,6 +71,8 @@ public class FieldsSyntaxTests {
     @ParameterizedTest
     @ValueSource(strings = {
             "fields",
+            "fields2",
+            "fields_wildcard"
     })
     void xpathTest1(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
@@ -86,11 +90,22 @@ public class FieldsSyntaxTests {
     void xpathTest2(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/fields/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/fieldsTransformation/fieldListType/fieldType[1]/value";
+        String xpathExp = "/root/transformStatement/fieldsTransformation/fieldListType/fieldType";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
-        // Check that 1 found
-        assertEquals(1,nodesA.getLength());
+        // Check that 3 found
+        Assertions.assertEquals(3,nodesA.getLength());
+        Assertions.assertEquals("foo_*",nodesA.item(0).getTextContent());
+        Assertions.assertEquals("bar_*",nodesA.item(1).getTextContent());
+        Assertions.assertEquals("eawg",nodesA.item(2).getTextContent());
+
+        String xpathExpPlus = "/root/transformStatement/fieldsTransformation/value";
+
+        NodeList nodesB = (NodeList) pstu.xpathQueryFile(fileName, xpathExpPlus, false);
+        Assertions.assertEquals(2,nodesB.getLength());
+        Assertions.assertEquals("fields",nodesB.item(0).getTextContent());
+        Assertions.assertEquals("+",nodesB.item(1).getTextContent());
+
     }
     @ParameterizedTest
     @ValueSource(strings = {
@@ -99,10 +114,12 @@ public class FieldsSyntaxTests {
     void xpathTest3(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
         String fileName = "src/test/resources/antlr4/commands/fields/" + arg + ".txt";
-        String xpathExp = "/root/transformStatement/fieldsTransformation/fieldListType/fieldType[1]/value";
+        String xpathExp = "/root/transformStatement/fieldsTransformation/fieldListType/fieldType";
 
         NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
-        // Check that 1 found
-        assertEquals(1,nodesA.getLength());
+        // Check that 2 found
+        Assertions.assertEquals(2,nodesA.getLength());
+        Assertions.assertEquals("host",nodesA.item(0).getTextContent());
+        Assertions.assertEquals("ip",nodesA.item(1).getTextContent());
     }
 }
