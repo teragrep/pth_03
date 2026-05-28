@@ -43,24 +43,3 @@
  * Teragrep, the applicable Commercial License may apply to this file if you as
  * a licensee so wish it.
  */
-lexer grammar COMMAND_MULTISEARCH_MODE;
-
-COMMAND_MULTISEARCH_MODE_ANTLR_BUG: 'command_multisearch_mode_antlr_bug' -> type(STRING_MATCH);
-
-// ++++++++++++++ COMMAND_MULTISEARCH_MODE ++++++++++++++
-mode COMMAND_MULTISEARCH_MODE;
-
-// skip
-COMMAND_MULTISEARCH_MODE_SPACE: SPACE -> channel(HIDDEN);
-
-// exits
-COMMAND_MULTISEARCH_MODE_PIPE: '|' -> type(PIPE), popMode;
-COMMAND_MULTISEARCH_MODE_BRACKET_R: ']' -> type(BRACKET_R), popMode, popMode;
-
-//subsearch within multisearch
-COMMAND_MULTISEARCH_MODE_BRACKET_L: '[' -> type(BRACKET_L), pushMode(COMMAND_MODE);
-
-
-// tokens
-
-COMMAND_MULTISEARCH_MODE_COMMENT: '<!--' .*? '-->' -> channel(DPLCOMMENT);

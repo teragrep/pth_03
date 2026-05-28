@@ -1,6 +1,6 @@
 /*
- * Teragrep Data Processing Language Parser Library PTH-03
- * Copyright (C) 2019-2026  Suomen Kanuuna Oy
+ * Data Processing Language (DPL) parser
+ * Copyright (C) 2026 Suomen Kanuuna Oy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -13,7 +13,7 @@
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <https://github.com/teragrep/teragrep/blob/main/LICENSE>.
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  *
  * Additional permission under GNU Affero General Public License version 3
@@ -56,23 +56,20 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.NodeList;
 
 public final class TableSyntaxTests {
+
     @ParameterizedTest(name = "{index} command=''{0}''")
     @ValueSource(strings = {
-            "table",
-            "tableWithComma",
-            "tableWildcard"
+            "table", "tableWithComma", "tableWildcard"
     })
-   void tableSyntaxParseTest(String arg) throws Exception {
+    void tableSyntaxParseTest(String arg) throws Exception {
         final String fileName = "src/test/resources/antlr4/commands/table/" + arg + ".txt";
-        final ParserSyntaxTestingUtility parserSyntaxTestingUtility
-                = new ParserSyntaxTestingUtility(fileName, false);
+        final ParserSyntaxTestingUtility parserSyntaxTestingUtility = new ParserSyntaxTestingUtility(fileName, false);
         parserSyntaxTestingUtility.syntaxParseTest(arg);
     }
+
     @ParameterizedTest
     @ValueSource(strings = {
-            "table",
-            "tableWithComma",
-            "tableWildcard"
+            "table", "tableWithComma", "tableWildcard"
     })
     void testTableTransformationExists(String arg) throws Exception {
         ParserStructureTestingUtility pstu = new ParserStructureTestingUtility();
@@ -81,8 +78,9 @@ public final class TableSyntaxTests {
 
         final NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 1 found
-        assertEquals(1,nodesA.getLength());
+        assertEquals(1, nodesA.getLength());
     }
+
     @ParameterizedTest
     @ValueSource(strings = {
             "table",
@@ -94,10 +92,10 @@ public final class TableSyntaxTests {
 
         final NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 3 found
-        Assertions.assertEquals(3,nodesA.getLength());
-        Assertions.assertEquals("fuu",nodesA.item(0).getTextContent());
-        Assertions.assertEquals("bli",nodesA.item(1).getTextContent());
-        Assertions.assertEquals("byr*",nodesA.item(2).getTextContent());
+        Assertions.assertEquals(3, nodesA.getLength());
+        Assertions.assertEquals("fuu", nodesA.item(0).getTextContent());
+        Assertions.assertEquals("bli", nodesA.item(1).getTextContent());
+        Assertions.assertEquals("byr*", nodesA.item(2).getTextContent());
     }
 
     @ParameterizedTest
@@ -111,10 +109,10 @@ public final class TableSyntaxTests {
 
         final NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 3 found
-        Assertions.assertEquals(3,nodesA.getLength());
-        Assertions.assertEquals("fuu",nodesA.item(0).getTextContent());
-        Assertions.assertEquals("bli",nodesA.item(1).getTextContent());
-        Assertions.assertEquals("byr*",nodesA.item(2).getTextContent());
+        Assertions.assertEquals(3, nodesA.getLength());
+        Assertions.assertEquals("fuu", nodesA.item(0).getTextContent());
+        Assertions.assertEquals("bli", nodesA.item(1).getTextContent());
+        Assertions.assertEquals("byr*", nodesA.item(2).getTextContent());
     }
 
     @ParameterizedTest
@@ -128,10 +126,10 @@ public final class TableSyntaxTests {
 
         final NodeList nodesA = (NodeList) pstu.xpathQueryFile(fileName, xpathExp, false);
         // Check that 4 found
-        Assertions.assertEquals(4,nodesA.getLength());
-        Assertions.assertEquals("*",nodesA.item(0).getTextContent());
-        Assertions.assertEquals("*foo",nodesA.item(1).getTextContent());
-        Assertions.assertEquals("foo*bar",nodesA.item(2).getTextContent());
-        Assertions.assertEquals("ba*",nodesA.item(3).getTextContent());
+        Assertions.assertEquals(4, nodesA.getLength());
+        Assertions.assertEquals("*", nodesA.item(0).getTextContent());
+        Assertions.assertEquals("*foo", nodesA.item(1).getTextContent());
+        Assertions.assertEquals("foo*bar", nodesA.item(2).getTextContent());
+        Assertions.assertEquals("ba*", nodesA.item(3).getTextContent());
     }
 }
