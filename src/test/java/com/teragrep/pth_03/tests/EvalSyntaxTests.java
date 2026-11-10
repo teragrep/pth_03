@@ -50,6 +50,13 @@ import com.teragrep.pth_03.ParserSyntaxTestingUtility;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.teragrep.pth_03.antlr.DPLLexer;
+import com.teragrep.pth_03.antlr.DPLParser;
+import org.antlr.v4.runtime.BailErrorStrategy;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.misc.ParseCancellationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -507,5 +514,50 @@ public class EvalSyntaxTests {
 
         // Invalid syntax should throw an exception.
         Assertions.assertThrows(InvocationTargetException.class, () -> pstu.syntaxParseTest(arg));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "| eval a=trim(\" A \")",
+            "| eval a=ltrim(\" A \")",
+            "| eval a=rtrim(\" A \")",
+            "| eval a=trim(\" A \",\" B \")",
+            "| eval a=ltrim(\" A \",\" B \")",
+            "| eval a=rtrim(\" A \",\" B \")"
+    })
+    // trim (A), trim(A,B), ltrim(A), ltrim(A,B), rtrim(A), rtrim(A,B)
+    void testTrimSyntax(String arg) {
+        Assertions.assertDoesNotThrow(() -> {
+            final CharStream input = CharStreams.fromString(arg);
+            final DPLLexer lexer = new DPLLexer(input);
+            final DPLParser parser = new DPLParser(new CommonTokenStream(lexer));
+            parser.setErrorHandler(new BailErrorStrategy()); // first syntax error aborts parsing
+            final DPLParser.RootContext root = parser.root();
+            Assertions.assertNotNull(root);
+            Assertions.assertEquals(0, parser.getNumberOfSyntaxErrors());
+        });
+    }
+
+    //failing tests, empty, 3 args, trim(A,)
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "| eval a=trim()",
+            "| eval a=ltrim()",
+            "| eval a=rtrim()",
+            "| eval a=trim(\" A \", \" B \", \" C \")",
+            "| eval a=ltrim(\" A \", \" B \", \" C \")",
+            "| eval a=rtrim(\" A \", \" B \", \" C \")",
+            "| eval a=trim(\"A\",)",
+            "| eval a=ltrim(\"A\",)",
+            "| eval a=rtrim(\"A\",)"
+    })
+    void testInvalidTrimSyntaxFails(String arg) {
+        Assertions.assertThrows(ParseCancellationException.class, () -> {
+            final CharStream input = CharStreams.fromString(arg);
+            final DPLLexer lexer = new DPLLexer(input);
+            final DPLParser parser = new DPLParser(new CommonTokenStream(lexer));
+            parser.setErrorHandler(new BailErrorStrategy()); // first syntax error aborts parsing
+            parser.root();
+        });
     }
 }
